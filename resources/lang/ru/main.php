@@ -1,0 +1,21 @@
+<?php
+return [
+    'breaking_news' => 'Последние новости',
+    'all_news' => 'Все новости',
+    'today' => 'Сегодня',
+    'home' => 'Главная',
+    'categories' => 'Категории',
+    'about_us' => 'О нас',
+    'contacts' => 'Контакты',
+    'search_placeholder' => 'Введите слова для поиска, затем нажмите Enter ...',
+    'copyright' => 'Авторское право',
+    'all_rights_received' => 'Все права защищены',
+    'template_made_with_by' => 'Шаблон сайта создан и предоставлен ресурсом',
+    'continue_reading' => 'Подробнее',
+    'todays_most_popular' => 'Актуально сегодня',
+    'dont_miss' => 'Не пропустите',
+    'advert' => 'Реклама',
+    'subscribe' => 'Подпишитесь',
+    'to_subscribe' => 'Подписаться',
+    'your_email' => 'Введите email',
+];

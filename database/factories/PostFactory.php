@@ -32,17 +32,17 @@ class PostFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title) . random_int(1,1000),
-            'image' => $this->faker->image('public/storage/images',640,480, 'abstract', true, true),
+            'image' => $this->faker->image('public/storage/images',640,480, 'abstract', false, true),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },
             'user_id' => function () {
                 User::inRandomOrder()->first()->id;
             },
-            'excerpt' => Str::limit($this->faker->realText(), random_int(40,60)),
-            'content' => Str::limit($this->faker->realText(), random_int(300,600)),
+            'excerpt' => Str::limit($this->faker->realText(), random_int(80,120)),
+            'content' => Str::limit($this->faker->realText(), random_int(450,800)),
             'is_published' => 1,
-            'published_at'=> Carbon::now(),
+            'published_at'=> $this->faker->dateTimeBetween('-2 months', 'now'),
         ];
     }
 
