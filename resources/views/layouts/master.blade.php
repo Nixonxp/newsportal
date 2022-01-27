@@ -17,24 +17,22 @@
     <link rel="icon" href="favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="{{ asset('css/core-style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-    <!-- Responsive CSS -->
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/public/app.css') }}">
 
 </head>
 
-<body>
+<body class="@yield('body_class')">
 <!-- Header Area Start -->
 <header class="header-area">
     <div class="top-header">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <!-- Breaking News Area -->
-                     @include('partials.blocks.public-header-breking-news', compact('lastPosts'))
+                @isset($lastPosts)
+                    @include('partials.blocks.public-header-breking-news', compact('lastPosts'))
+                @endisset
                 <!-- Stock News Area -->
-                     @include('partials.blocks.public-header-stocks')
+                 @include('partials.blocks.public-header-stocks')
             </div>
         </div>
     </div>
@@ -58,7 +56,8 @@
         </div>
     </div>
     <!-- Bottom Header Area -->
-    <div class="bottom-header">
+    @isset($categories)
+        <div class="bottom-header">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -99,6 +98,7 @@
             </div>
         </div>
     </div>
+    @endisset
 </header>
 <!-- Header Area End -->
 
@@ -107,6 +107,7 @@
 <!-- Footer Area Start -->
 <footer class="footer-area bg-img background-overlay">
     <!-- Top Footer Area -->
+    @isset($categories)
     <div class="top-footer-area section_padding_100_70">
         <div class="container">
             <div class="row">
@@ -124,6 +125,7 @@
             </div>
         </div>
     </div>
+    @endisset
 
     <!-- Bottom Footer Area -->
     <div class="bottom-footer-area">
@@ -143,16 +145,7 @@
 </footer>
 <!-- Footer Area End -->
 
-<!-- jQuery (Necessary for All JavaScript Plugins) -->
-<script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
-<!-- Popper js -->
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<!-- Bootstrap js -->
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<!-- Plugins js -->
-<script src="{{ asset('js/plugins.js') }}"></script>
-<!-- Active js -->
-<script src="{{ asset('js/active.js') }}"></script>
+<script src="{{ asset('/js/public/app.js') }}"></script>
 
 </body>
 

@@ -1,5 +1,6 @@
-@extends('layouts.auth')
+@extends('layouts.master')
 @section('title', __('auth.register_title'))
+@section('body_class', 'auth-folder')
 
 @section('content')
 <div class="container">

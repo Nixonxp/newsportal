@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@lang('admin.admin_space_panel') | @yield('title')</title>
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/app.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -218,6 +218,6 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/admin/app.js') }}"></script>
 </body>
 </html>
