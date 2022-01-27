@@ -58,7 +58,7 @@
                     <!-- Don't Miss Widget -->
                     <div class="donnot-miss-widget">
                         <div class="widget-title">
-                            <h5>@lang('dont_miss')</h5>
+                            <h5>@lang('main.dont_miss')</h5>
                         </div>
                         @include('partials.card.main-page-dont-miss-sidebar-widget', compact('lastPosts'))
                     </div>

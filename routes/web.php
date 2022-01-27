@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes([
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false
+]);
+
+Route::get( '/logout', [ LoginController::class, 'logout' ] )->name('get-logout');
+
+Route::get('/admin', [HomeController::class, 'index'])->name('admin');
+
 Route::get('/', [IndexController::class, 'index'])->name('home');
+
