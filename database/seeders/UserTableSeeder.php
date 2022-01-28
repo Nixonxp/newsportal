@@ -19,16 +19,19 @@ class UserTableSeeder extends Seeder
                     'name' => 'Admin',
                     'email' => 'admin@example.com',
                     'password' => bcrypt('adminpass'),
+                    'role_id' => 1,
                 ],
                 [
-                    'name' => 'Content manager',
-                    'email' => 'cm@example.com',
+                    'name' => 'Editor',
+                    'email' => 'editor@example.com',
                     'password' => bcrypt('cmanager123'),
+                    'role_id' => 2,
                 ],
                 [
                     'name' => 'Chief Editor',
                     'email' => 'chiefr@example.com',
                     'password' => bcrypt('chiefrpass'),
+                    'role_id' => 3,
                 ],
             ]
         );
