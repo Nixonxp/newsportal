@@ -24,7 +24,9 @@ Auth::routes([
 
 Route::get( '/logout', [ LoginController::class, 'logout' ] )->name('get-logout');
 
-Route::get('/admin', [HomeController::class, 'index'])->name('admin');
+Route::middleware('roles:admin,Chief-editor,Editor')->group(function(){
+    Route::get('/admin', [HomeController::class, 'index'])->name('admin');
+});
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
