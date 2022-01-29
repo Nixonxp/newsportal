@@ -8,6 +8,9 @@ use Illuminate\Support\Carbon;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Str;
 
+/**
+ * Model for news entities
+ */
 class Post extends Model
 {
     use HasFactory;

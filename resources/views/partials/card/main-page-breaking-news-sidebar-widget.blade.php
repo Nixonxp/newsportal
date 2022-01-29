@@ -2,7 +2,7 @@
 
 @foreach($lastPosts->take(2) as $post)
     <div class="single-breaking-news-widget">
-        <img src="{{ Storage::url('images/' . $mainPost->image) }}" alt="">
+        <img src="{{ Storage::url($mainPost->image) }}" alt="">
         <div class="breakingnews-title">
             <p>{{ $post->category->name }}</p>
         </div>

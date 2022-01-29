@@ -1,5 +1,5 @@
 @php /** @var \App\Models\Post $post */  @endphp
-<div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({{ Storage::url('images/' . $post->image) }});">
+<div class="single-blog-post-slide bg-img background-overlay-5" style="background-image: url({{ Storage::url($post->image) }});">
     <!-- Single Blog Post Content -->
     <div class="single-blog-post-content">
         <div class="tags">

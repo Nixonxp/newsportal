@@ -26,13 +26,13 @@ class PostFactory extends Factory
 
         $storagePath = storage_path($this->storage);
         if(!File::exists($storagePath)){
-            File::makeDirectory($storagePath);
+            File::makeDirectory($storagePath, null, true);
         }
 
         return [
             'title' => $title,
             'slug' => Str::slug($title) . random_int(1,1000),
-            'image' => $this->faker->image('public/storage/images',640,480, 'abstract', false, true),
+            'image' => 'images/' . $this->faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },

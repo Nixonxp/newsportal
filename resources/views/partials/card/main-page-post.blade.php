@@ -9,7 +9,7 @@
     <p class="gazette-post-date">{{ $mainPost->middleFormatDate }}</p>
     <!-- Post Thumbnail -->
     <div class="blog-post-thumbnail my-5">
-        <img src="{{ Storage::url('images/' . $mainPost->image) }}" alt="post-thumb">
+        <img src="{{ Storage::url($mainPost->image) }}" alt="post-thumb">
     </div>
     <!-- Post Excerpt -->
     <p>{{ $mainPost->excerpt }}</p>

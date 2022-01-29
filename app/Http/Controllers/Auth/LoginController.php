@@ -30,7 +30,7 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        $routeName = 'admin'; // todo redirect from roles
+        $routeName = 'admin.dashboard'; // todo redirect from roles
 
         return route($routeName);
     }

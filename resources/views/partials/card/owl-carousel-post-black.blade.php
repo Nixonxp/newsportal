@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 col-md-5">
             <div class="editorial-post-thumb">
-                <img src="{{ Storage::url('images/' . $post->image) }}" alt="">
+                <img src="{{ Storage::url($post->image) }}" alt="">
             </div>
         </div>
         <div class="col-12 col-md-7">

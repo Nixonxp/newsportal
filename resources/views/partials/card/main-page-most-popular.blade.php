@@ -4,7 +4,7 @@
     <!-- Single Today Post -->
     <div class="gazette-single-todays-post d-md-flex align-items-start mb-50">
         <div class="todays-post-thumb">
-            <img src="{{ Storage::url('images/' . $post->image) }}" alt="">
+            <img src="{{ Storage::url($post->image) }}" alt="">
         </div>
         <div class="todays-post-content">
             <!-- Post Tag -->
