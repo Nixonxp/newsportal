@@ -132,4 +132,10 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    'attributes' => [
+        'name' => __('admin.name'),
+        'slug' => __('admin.code'),
+        'description' => __('admin.description'),
+        'title' => __('admin.title'),
+    ]
 ];

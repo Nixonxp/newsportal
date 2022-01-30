@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class NewsCategoryUpdateRequest extends FormRequest
 {
@@ -29,8 +30,18 @@ class NewsCategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|required|min:3|unique:categories,name',
-            'slug' => 'string|required|max:255',
+            'name' => [
+                'string',
+                'required',
+                'min:3',
+                Rule::unique('categories')->ignore($this->route()->category)
+            ],
+            'slug' => [
+                'string',
+                'required',
+                'max:500',
+                Rule::unique('categories')->ignore($this->route()->category)
+            ],
             'description' => 'string'
         ];
     }

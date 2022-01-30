@@ -107,7 +107,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link @routeactive('admin.dashboard')">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 @lang('admin.dashboard')
@@ -116,7 +116,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link active">
+                                <a href="{{ route('admin.categories.index') }}" class="nav-link @routeactive('admin.dashboard')">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>@lang('admin.dashboard') #1</p>
                                 </a>
@@ -124,14 +124,17 @@
                         </ul>
                     </li>
                     <li class="nav-header">@lang('admin.content')</li>
+
+                    @userhasroles(['admin', 'chief-editor'])
                     <li class="nav-item">
-                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                        <a href="{{ route('admin.categories.index') }}" class="nav-link @routeactive('admin.categories.index')">
                             <i class="nav-icon fas fa-list"></i>
                             <p>
                                 @lang('admin.categories')
                             </p>
                         </a>
                     </li>
+                    @enduserhasroles
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">

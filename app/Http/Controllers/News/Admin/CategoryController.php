@@ -16,7 +16,7 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        $categories = Category::all(['id', 'name', 'created_at', 'updated_at']);
+        $categories = Category::orderBy('id', 'asc')->get(['id', 'name', 'created_at', 'updated_at']);
         return view('admin.categories.index', compact('categories'));
     }
 
