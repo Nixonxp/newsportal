@@ -2,8 +2,10 @@
 @php /** @var \App\Models\Category $category */  @endphp
 @isset($category)
     @section('title', __('admin.edit_category', ['name' => $category->name]))
+    @section('breadcrumbs', Breadcrumbs::view('partials.blocks.admin-breadcrumbs', \Request::route()->getName(), $category))
 @else
     @section('title', __('admin.create_category'))
+    @section('breadcrumbs', Breadcrumbs::view('partials.blocks.admin-breadcrumbs', \Request::route()->getName()))
 @endisset
 
 @section('content')

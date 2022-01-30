@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 @section('title', __('admin.categories'))
+@section('breadcrumbs', Breadcrumbs::view('partials.blocks.admin-breadcrumbs', \Request::route()->getName()))
 
 @section('content')
 
@@ -74,7 +75,7 @@
                                 </a>
                                 @csrf
                                 @method('DELETE')
-                                <input class="btn btn-danger" type="submit" value="@lang('admin.delete')">
+                                <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
                             </form>
                         </td>
                     </tr>

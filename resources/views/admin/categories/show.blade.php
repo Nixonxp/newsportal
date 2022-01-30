@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 @section('title', __('admin.categories'))
+@section('breadcrumbs', Breadcrumbs::view('partials.blocks.admin-breadcrumbs', \Request::route()->getName(), $category))
 
 @section('content')
 
@@ -26,7 +27,6 @@
                         <div class="col-12">
                             <h4>@lang('admin.main_data')</h4>
                             @php /** @var \App\Models\Category $category */  @endphp
-
                             <table class="table">
                                 <tbody>
                                 <tr>
@@ -51,7 +51,7 @@
                                 </tr>
                                 <tr>
                                     <td>@lang('admin.description')</td>
-                                    <td>{{ $category->description }}</td>
+                                    <td>{{ $category->getDescription() }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -75,16 +75,16 @@
                     </div>
 
                     <div class="text-center mt-5 mb-3">
-                        <a class="btn btn-info btn-sm" href="{{ route('admin.categories.edit', $category) }}">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            @lang('admin.edit')
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="{{ route('admin.categories.destroy', $category) }}">
-                            <i class="fas fa-trash">
-                            </i>
-                            @lang('admin.delete')
-                        </a>
+                        <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                            <a class="btn btn-info btn-sm" href="{{ route('admin.categories.edit', $category) }}">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                                @lang('admin.edit')
+                            </a>
+                            @csrf
+                            @method('DELETE')
+                            <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
+                        </form>
                     </div>
                 </div>
             </div>
