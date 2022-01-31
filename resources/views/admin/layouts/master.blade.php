@@ -85,7 +85,7 @@
                     <img src="/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>--}}
                 <div class="info">
-                    <a href="#" class="d-block">{{ \Auth::user()->name }}</a>
+                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                 </div>
             </div>
 
@@ -135,6 +135,15 @@
                         </a>
                     </li>
                     @enduserhasroles
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.posts.index') }}" class="nav-link @routeactive('admin.posts.index')">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                @lang('admin.news')
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">

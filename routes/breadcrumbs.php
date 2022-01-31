@@ -28,7 +28,7 @@ Breadcrumbs::macro('resource', function (string $name, string $title) {
     // Admin > Categories > Post 123
     Breadcrumbs::for("{$name}.show", function (BreadcrumbTrail $trail, $model) use ($name) {
         $trail->parent("{$name}.index");
-        $trail->push($model->name, route("{$name}.show", $model));
+        $trail->push(($model->name ?? $model->title), route("{$name}.show", $model));
     });
 
     // Admin > Categories > Post 123 > Edit
@@ -39,3 +39,4 @@ Breadcrumbs::macro('resource', function (string $name, string $title) {
 });
 
 Breadcrumbs::resource('admin.categories', __('admin.categories'));
+Breadcrumbs::resource('admin.posts', __('admin.news'));
