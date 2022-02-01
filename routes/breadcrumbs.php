@@ -12,7 +12,7 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
  * Categories
  */
 
-Breadcrumbs::macro('resource', function (string $name, string $title) {
+Breadcrumbs::macro('resource', function (string $name, string $title, string $elementName) {
     // Admin > Categories
     Breadcrumbs::for("{$name}.index", function (BreadcrumbTrail $trail) use ($name, $title) {
         $trail->parent('admin.dashboard');
@@ -26,9 +26,9 @@ Breadcrumbs::macro('resource', function (string $name, string $title) {
     });
 
     // Admin > Categories > Post 123
-    Breadcrumbs::for("{$name}.show", function (BreadcrumbTrail $trail, $model) use ($name) {
+    Breadcrumbs::for("{$name}.show", function (BreadcrumbTrail $trail, $model) use ($name, $elementName) {
         $trail->parent("{$name}.index");
-        $trail->push(($model->name ?? $model->title), route("{$name}.show", $model));
+        $trail->push($elementName, route("{$name}.show", $model));
     });
 
     // Admin > Categories > Post 123 > Edit
@@ -38,5 +38,5 @@ Breadcrumbs::macro('resource', function (string $name, string $title) {
     });
 });
 
-Breadcrumbs::resource('admin.categories', __('admin.categories'));
-Breadcrumbs::resource('admin.posts', __('admin.news'));
+Breadcrumbs::resource('admin.categories', __('admin.categories'), __('admin.category_detail'));
+Breadcrumbs::resource('admin.posts', __('admin.news'), __('admin.singlenews_detail'));

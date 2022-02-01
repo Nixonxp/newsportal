@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
 
-        Post::factory(100)->withCleanStorageFolder()->create();
+        Post::factory(30)->withCleanStorageFolder()->create();
     }
 }

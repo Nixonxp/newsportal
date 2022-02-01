@@ -13,7 +13,7 @@ class NewsPostFilters extends QueryFilter
         return match ($value) {
             'publicated' => $this->builder->where('is_published', true)->whereNull('deleted_at'),
             'draft' => $this->builder->where('is_published', false)->whereNull('deleted_at'),
-            'deleted' => $this->builder->where('deleted_at', '<>', null),
+            'deleted' => $this->builder->onlyTrashed(),
             default => null,
         };
     }

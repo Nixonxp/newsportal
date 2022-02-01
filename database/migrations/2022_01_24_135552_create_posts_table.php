@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->text('excerpt')->nullable(); // preview text
             $table->text('content');
             $table->boolean('is_published')->default(false);
-            $table->timestamp('published_at')->nullable;
+            $table->timestamp('published_at')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
             $table->softDeletes();

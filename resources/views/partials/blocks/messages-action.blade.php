@@ -4,5 +4,3 @@
 @if(session()->has('warning'))
 <p class="alert alert-warning">{{ session()->get('warning') }}</p>
 @endif
-
-

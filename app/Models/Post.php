@@ -6,7 +6,9 @@ use App\Services\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\HtmlString;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Str;
 
@@ -15,7 +17,17 @@ use Illuminate\Support\Str;
  */
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'image',
+        'category_id',
+        'user_id',
+        'excerpt',
+        'content',
+    ];
 
     /**
      * Return parent category
@@ -24,6 +36,21 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getExcerpt()
+    {
+        return new HtmlString($this->excerpt);
+    }
+
+    public function getContent()
+    {
+        return new HtmlString($this->content);
     }
 
     /**
