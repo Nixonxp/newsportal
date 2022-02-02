@@ -6,7 +6,7 @@
             <img src="{{ Storage::url($mainPost->image) }}" alt="">
         </div>
         <div class="dont-miss-post-content">
-            <a href="#" class="font-pt">{{ $post->title }}</a>
+            <a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt">{{ $post->title }}</a>
             <span>{{ $post->middleShortMonthFormatDate }}</span>
         </div>
     </div>

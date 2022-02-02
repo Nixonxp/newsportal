@@ -88,6 +88,11 @@ class Post extends Model
         return $filters->apply($builder);
     }
 
+    public function scopeCategory($query, $cid)
+    {
+        return $query->where('category_id', $cid);
+    }
+
     /**
      * Return time format like - 12:54 Ноя 27, 2021
      *

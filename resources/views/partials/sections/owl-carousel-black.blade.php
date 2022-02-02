@@ -1,3 +1,4 @@
+@if ($posts->count() > 1)
 <section class="gazatte-editorial-area section_padding_100 bg-dark">
     <div class="container">
         <div class="row">
@@ -11,3 +12,4 @@
         </div>
     </div>
 </section>
+@endif

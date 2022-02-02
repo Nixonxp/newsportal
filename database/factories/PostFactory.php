@@ -39,8 +39,8 @@ class PostFactory extends Factory
             'user_id' => function () {
                 User::inRandomOrder()->first()->id;
             },
-            'excerpt' => Str::limit($this->faker->realText(), random_int(80,120)),
-            'content' => Str::limit($this->faker->realText(), random_int(450,800)),
+            'excerpt' => $this->faker->realText(120),
+            'content' => $this->faker->realText(2000, 5),
             'is_published' => 1,
             'published_at'=> $this->faker->dateTimeBetween('-2 months', 'now'),
         ];

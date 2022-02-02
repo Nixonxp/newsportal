@@ -28,7 +28,7 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <!-- Breaking News Area -->
-                @isset($lastPosts)
+                @isset($lastPosts) {{--'// todo to all pages--}}
                     @include('partials.blocks.public-header-breking-news', compact('lastPosts'))
                 @endisset
                 <!-- Stock News Area -->
@@ -43,13 +43,13 @@
                 <!-- Logo Area -->
                 <div class="col-12 col-md-4">
                     <div class="logo-area">
-                        <a href="{{ route('home') }}"><img src="img/logo.png" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img src="/img/logo.png" alt="logo"></a>
                     </div>
                 </div>
                 <!-- Header Advert Area -->
                 <div class="col-12 col-md-8">
                     <div class="header-advert-area">
-                        <a href="#"><img src="img/top-advert.png" alt="header-add"></a>
+                        <a href="#"><img src="/img/top-advert.png" alt="header-add"></a>
                     </div>
                 </div>
             </div>
@@ -66,12 +66,12 @@
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gazetteMenu" aria-controls="gazetteMenu" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i> Menu</button>
                             <div class="collapse navbar-collapse" id="gazetteMenu">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active">
+                                    <li class="nav-item @routeactive('home')">
                                         <a class="nav-link" href="{{ route('home') }}">@lang('main.today')</a>
                                     </li>
                                     @foreach($categories as $category)
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">{{ $category->name }}</a>
+                                        <li class="nav-item {{ Helper::classActiveSegment(2, $category->slug) }}">
+                                            <a class="nav-link" href="{{ route('category', $category) }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -116,7 +116,9 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                         <div class="single-footer-widget">
                             <div class="footer-widget-title">
-                                <h4 class="font-pt">{{ $category->name }}</h4>
+                                <a class="nav-link" href="{{ route('category', $category) }}">
+                                    <h4 class="font-pt">{{ $category->name }}</h4>
+                                </a>
                             </div>
                         </div>
                     </div>

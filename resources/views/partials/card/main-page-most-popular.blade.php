@@ -9,9 +9,9 @@
         <div class="todays-post-content">
             <!-- Post Tag -->
             <div class="gazette-post-tag">
-                <a href="#">{{ $post->category->name }}</a>
+                <a href="{{ route('category', $post->category) }}">{{ $post->category->name }}</a>
             </div>
-            <h3><a href="#" class="font-pt mb-2">{{ $post->title }}</a></h3>
+            <h3><a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt mb-2">{{ $post->title }}</a></h3>
             <span class="gazette-post-date mb-2">{{ $post->middleFormatDate }}</span>
             {{--<a href="#" class="post-total-comments">3 Comments</a>--}}
             <p>{{ $mainPost->excerpt }}</p>

@@ -4,7 +4,7 @@
         <div id="breakingNewsTicker" class="ticker">
             <ul>
                 @foreach($lastPosts as $post)
-                <li><a href="#">{{ $post->title }}</a></li>
+                <li><a href="{{ route('newspost', [$post->category, $post]) }}">{{ $post->title }}</a></li>
                 @endforeach
             </ul>
         </div>

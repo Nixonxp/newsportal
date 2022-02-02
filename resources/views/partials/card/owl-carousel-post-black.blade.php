@@ -10,9 +10,9 @@
             <div class="editorial-post-content">
                 <!-- Post Tag -->
                 <div class="gazette-post-tag">
-                    <a href="#">{{ $post->category->name }}</a>
+                    <a href="{{ route('category', $post->category) }}">{{ $post->category->name }}</a>
                 </div>
-                <h2><a href="#" class="font-pt mb-15">{{ $post->title }}</a></h2>
+                <h2><a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt mb-15">{{ $post->title }}</a></h2>
                 <p class="editorial-post-date mb-15">{{ $post->middleFormatDate }}</p>
                 <p>{{ $post->excerpt }}</p>
             </div>

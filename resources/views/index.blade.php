@@ -19,7 +19,7 @@
 
                 @foreach($lastPosts->take(5) as $post)
                     <li>
-                        <a href="#"><span class="latest-news-time">{{ $post->shortTimeFormat }}</span>{{ $post->title }}</a>
+                        <a href="{{ route('newspost', [$post->category, $post]) }}"><span class="latest-news-time">{{ $post->shortTimeFormat }}</span>{{ $post->title }}</a>
                     </li>
                 @endforeach
             </ul>
@@ -97,7 +97,7 @@
                     <h4 class="block-heading">@lang('main.all_news')</h4>
                     @foreach($posts as $post)
                         <div class="gazette-single-catagory-post">
-                            <h5><a href="#" class="font-pt">{{ $post->title }}</a></h5>
+                            <h5><a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt">{{ $post->title }}</a></h5>
                             <span>{{ $post->fullShortTimeFormat }}</span>
                         </div>
                     @endforeach
