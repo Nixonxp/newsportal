@@ -28,6 +28,9 @@ class CreateNewsPostDtoFactory
         $dto->category_id = (int)$data['category_id'];
         $dto->excerpt = $data['excerpt'];
         $dto->content = $data['content'];
+        $dto->is_published = (int)$data['is_published'] === 1;
+        $dto->main_slider = (int)$data['main_slider'] === 1;
+        $dto->popular = (int)$data['popular'] === 1;
 
         if (!empty($data['image'])) {
             $dto->image = $data['image'];

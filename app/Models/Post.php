@@ -24,8 +24,10 @@ class Post extends Model
         'slug',
         'image',
         'category_id',
-        'user_id',
         'excerpt',
+        'is_published',
+        'popular',
+        'main_slider',
         'content',
     ];
 
@@ -46,6 +48,21 @@ class Post extends Model
     public function getExcerpt()
     {
         return new HtmlString($this->excerpt);
+    }
+
+    public function isPopular()
+    {
+        return $this->popular;
+    }
+
+    public function isPublished()
+    {
+        return $this->is_published;
+    }
+
+    public function isShowInMainSlider()
+    {
+        return $this->main_slider;
     }
 
     public function getContent()

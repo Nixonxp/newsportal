@@ -61,6 +61,12 @@ return [
     'first_new_updates' => 'Недавно измененные',
     'apply' => 'Применить',
     'reset' => 'Сбросить',
+    'show_popular' => 'Показывать в разделе "популярное"',
+    'show_in_main_slider' => 'Показывать в главном слайдере',
     'download_new_image' => 'Загрузить новое изображение',
     'download_image' => 'Загрузить изображение',
+    'label_true' => '<span class="badge bg-success">да</span>',
+    'label_false' => '<span class="badge bg-danger">нет</span>',
+    'label_not_uploaded' => '<span class="badge bg-secondary">не загружено</span>',
+    'label_not_setted' => '<span class="badge bg-secondary">не установлен</span>',
 ];

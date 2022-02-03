@@ -4,16 +4,16 @@ namespace App\Services\NewsPost;
 
 use App\Dto\NewsPost\NewsPostDto;
 use App\Models\Post as Model;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\NewsPostRepositoryInterface;
 
 class NewsPostService
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @var NewsPostRepositoryInterface
      */
     private $newsRepository;
 
-    public function __construct(CategoryRepositoryInterface $newsRepository)
+    public function __construct(NewsPostRepositoryInterface $newsRepository)
     {
         $this->newsRepository = $newsRepository;
     }

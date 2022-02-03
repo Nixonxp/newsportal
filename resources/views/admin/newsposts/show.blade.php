@@ -54,18 +54,22 @@
                                     <td>{{ $post->category->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>@lang('admin.author')</td>
-                                    <td>
-                                        @isset($post->user_id)
-                                            {{ $post->user->name }}
-                                        @else
-                                            -
-                                        @endisset
-                                    </td>
+                                    <td>@lang('admin.show_popular')</td>
+                                    <td>{!! $post->isPopular() ? __('admin.label_true') : __('admin.label_false') !!}</td>
+                                </tr>
+                                <tr>
+                                    <td>@lang('admin.show_in_main_slider')</td>
+                                    <td>{!! $post->isShowInMainSlider() ? __('admin.label_true') : __('admin.label_false') !!}</td>
                                 </tr>
                                 <tr>
                                     <td>@lang('admin.image')</td>
-                                    <td><img width="250px" height="250px" src="{{ Storage::url($post->image) }}" alt=""></td>
+                                    <td>
+                                        @isset($post->image)
+                                            <img width="250px" height="250px" src="{{ Storage::url($post->image) }}" alt="">
+                                        @else
+                                            {!! __('admin.label_not_uploaded') !!}
+                                        @endisset
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>@lang('admin.excerpt')</td>
@@ -93,6 +97,15 @@
                                 @else
                                     -
                             @endisset
+                            </b>
+                        </p>
+                        <p class="text-sm">@lang('admin.author')
+                            <b class="d-block">
+                                @isset($post->user_id)
+                                    {{ $post->user->name }}
+                                @else
+                                    {!! __('admin.label_not_setted') !!}
+                                @endisset
                             </b>
                         </p>
                         <p class="text-sm">@lang('admin.status')

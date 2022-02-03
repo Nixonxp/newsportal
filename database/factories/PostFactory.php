@@ -41,7 +41,9 @@ class PostFactory extends Factory
             },
             'excerpt' => $this->faker->realText(120),
             'content' => $this->faker->realText(2000, 5),
-            'is_published' => 1,
+            'main_slider' => (random_int(1,10) > 8),
+            'popular' => (random_int(1,10) > 8),
+            'is_published' => (random_int(1,10) > 1),
             'published_at'=> $this->faker->dateTimeBetween('-2 months', 'now'),
         ];
     }

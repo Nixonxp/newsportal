@@ -11,6 +11,8 @@ class NewsPostDto
     public string $content;
     public ?int $user_id = null;
     public ?bool $is_published = null;
+    public ?bool $main_slider = false;
+    public ?bool $popular = false;
     public ?string $image;
 
     public function toArray():array

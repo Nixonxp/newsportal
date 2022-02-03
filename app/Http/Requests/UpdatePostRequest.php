@@ -48,6 +48,9 @@ class UpdatePostRequest extends FormRequest
             'category_id' => 'integer|required|exists:\App\Models\Category,id',
             'excerpt' => 'string|min:3|max:400|required',
             'content' => 'string|min:3|max:10000|required',
+            'is_published' => 'in:0,1',
+            'popular' => 'in:0,1',
+            'main_slider' => 'in:0,1',
             'image' => 'image|nullable',
         ];
     }

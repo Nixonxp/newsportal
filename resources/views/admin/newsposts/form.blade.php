@@ -64,6 +64,31 @@
                     </div>
                 </div>
 
+                <br>
+                @foreach([
+                'is_published' => __('admin.published'),
+                'popular' => __('admin.show_popular'),
+                'main_slider' => __('admin.show_in_main_slider'),
+            ] as $field => $title)
+                    <div class="input-group row">
+                        <label class="col-sm-6 col-form-label" for="flexCheckDefault {{ $field }}">
+                            {{ $title }}
+                        </label>
+                        <div class="col-sm-6">
+                            <input name="{{ $field }}"
+                                   type="hidden"
+                                   value="0">
+                            <input class="form-check-input"
+                                   name="{{ $field }}"
+                                   type="checkbox"
+                                   id="flexCheckDefault {{ $field }}"
+                                   value="1"
+                                   @if(isset($post) && $post->$field === true) checked @endif
+                            >
+                        </div>
+                    </div>
+                @endforeach
+
                 <div class="form-group">
                     <label>@lang('admin.image')</label><br>
                     <img id='img-upload' src='{{ isset($post->image) ? Storage::url($post->image) : '' }}'/>
