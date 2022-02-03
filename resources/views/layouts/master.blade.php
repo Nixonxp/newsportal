@@ -24,18 +24,7 @@
 <body class="@yield('body_class')">
 <!-- Header Area Start -->
 <header class="header-area">
-    <div class="top-header">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <!-- Breaking News Area -->
-                @isset($lastPosts) {{--'// todo to all pages--}}
-                    @include('partials.blocks.public-header-breking-news', compact('lastPosts'))
-                @endisset
-                <!-- Stock News Area -->
-                 @include('partials.blocks.public-header-stocks')
-            </div>
-        </div>
-    </div>
+    <x-top-header></x-top-header>
     <!-- Middle Header Area -->
     <div class="middle-header">
         <div class="container h-100">

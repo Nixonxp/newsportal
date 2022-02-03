@@ -2,66 +2,25 @@
 @section('title', 'Главная')
 
 @section('content')
-<!-- Welcome Blog Slide Area Start -->
-<section class="welcome-blog-post-slide owl-carousel">
-    <!-- Single Blog Post -->
-    @foreach($posts as $post)
-        @include('partials.card.owl-carousel-post', compact('post'))
-    @endforeach
-</section>
-<!-- Welcome Blog Slide Area End -->
 
-<!-- Latest News Marquee Area Start -->
-<div class="latest-news-marquee-area">
-    <div class="simple-marquee-container">
-        <div class="marquee">
-            <ul class="marquee-content-items">
+<x-index-main-slider></x-index-main-slider>
 
-                @foreach($lastPosts->take(5) as $post)
-                    <li>
-                        <a href="{{ route('newspost', [$post->category, $post]) }}"><span class="latest-news-time">{{ $post->shortTimeFormat }}</span>{{ $post->title }}</a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- Latest News Marquee Area End -->
+<x-latest-news-ribbon></x-latest-news-ribbon>
+
 
 <!-- Main Content Area Start -->
 <section class="main-content-wrapper section_padding_100">
 
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-9">
-                @include('partials.card.main-page-post', compact('mainPost'))
 
-                <div class="gazette-todays-post section_padding_100_50">
-                    <div class="gazette-heading">
-                        <h4>@lang('main.todays_most_popular')</h4>
-                    </div>
-                    @include('partials.card.main-page-most-popular', compact('lastPosts'))
-                </div>
-
-            </div>
+            <x-popular-news-index></x-popular-news-index>
 
             <div class="col-12 col-lg-3 col-md-6">
                 <div class="sidebar-area">
-                    <!-- Breaking News Widget -->
-                    <div class="breaking-news-widget">
-                        <div class="widget-title">
-                            <h5>@lang('main.breaking_news')</h5>
-                        </div>
-                        @include('partials.card.main-page-breaking-news-sidebar-widget', compact('lastPosts'))
-                    </div>
 
-                    <!-- Don't Miss Widget -->
-                    <div class="donnot-miss-widget">
-                        <div class="widget-title">
-                            <h5>@lang('main.dont_miss')</h5>
-                        </div>
-                        @include('partials.card.main-page-dont-miss-sidebar-widget', compact('lastPosts'))
-                    </div>
+                    <x-news-widget></x-news-widget>
+
                     <!-- Advert Widget -->
                     <div class="advert-widget">
                         <div class="widget-title">
@@ -90,25 +49,10 @@
     <!-- Main Content Area End -->
 
     <!-- Catagory Posts Area Start -->
-    <div class="gazette-catagory-posts-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <h4 class="block-heading">@lang('main.all_news')</h4>
-                    @foreach($posts as $post)
-                        <div class="gazette-single-catagory-post">
-                            <h5><a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt">{{ $post->title }}</a></h5>
-                            <span>{{ $post->fullShortTimeFormat }}</span>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-news-list-paginate :perPage="25"></x-news-list-paginate>
 </section>
 <!-- Catagory Posts Area End -->
 
-
-@include('partials.sections.owl-carousel-black', compact('posts'))
+<x-popular-news-carousel></x-popular-news-carousel>
 
 @endsection('content')

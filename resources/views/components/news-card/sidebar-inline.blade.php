@@ -1,9 +1,9 @@
-@php /** @var \App\Models\Post $lastPosts */  @endphp
+@php /** @var \App\Models\Post $post */  @endphp
 
-@foreach($lastPosts->take(3) as $post)
+@foreach($posts as $post)
     <div class="single-dont-miss-post d-flex mb-30">
         <div class="dont-miss-post-thumb">
-            <img src="{{ Storage::url($mainPost->image) }}" alt="">
+            <img src="{{ Storage::url($post->image) }}" alt="">
         </div>
         <div class="dont-miss-post-content">
             <a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt">{{ $post->title }}</a>

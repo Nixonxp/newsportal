@@ -1,8 +1,8 @@
-@php /** @var \App\Models\Post $lastPosts */  @endphp
+@php /** @var \App\Models\Post $post */  @endphp
 
-@foreach($lastPosts->take(2) as $post)
+@foreach($posts as $post)
     <div class="single-breaking-news-widget">
-        <img src="{{ Storage::url($mainPost->image) }}" alt="">
+        <img src="{{ Storage::url($post->image) }}" alt="">
         <div class="breakingnews-title">
             <p>{{ $post->category->name }}</p>
         </div>

@@ -24,26 +24,14 @@
 <!-- Breadcumb Area End -->
 
 <!-- Editorial Area Start -->
-@php $posts = $categoryNews->take(5); @endphp
-@include('partials.sections.owl-carousel-black', compact('posts'))
+<x-popular-news-carousel :categoryId="$category->id"></x-popular-news-carousel>
 <!-- Editorial Area End -->
 
 <section class="catagory-welcome-post-area section_padding_100">
     <div class="container">
-        @include('partials.blocks.catagory-welcome-post-area', compact('posts'))
+        <x-popular-category-posts :categoryId="$category->id"></x-popular-category-posts>
 
-        <div class="row">
-            <div class="col-12 col-md-12">
-                <h4 class="block-heading">@lang('main.all_news')</h4>
-                @foreach($categoryNewsPaginate as $post)
-                    <div class="gazette-single-catagory-post">
-                        <h5><a href="{{ route('newspost', [$post->category, $post]) }}" class="font-pt">{{ $post->title }}</a></h5>
-                        <span>{{ $post->fullShortTimeFormat }}</span>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        {{ $categoryNewsPaginate->links('vendor.pagination.custom') }}
+        <x-news-list-paginate :perPage="25" :category="$category->id"></x-news-list-paginate>
     </div>
 </section>
 

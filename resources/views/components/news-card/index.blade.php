@@ -16,13 +16,7 @@
     <!-- Reading More -->
     <div class="post-continue-reading-share d-sm-flex align-items-center justify-content-between mt-30">
         <div class="post-continue-btn">
-            <a href="{{ route('newspost', [$mainPost->category, $post]) }}" class="font-pt">@lang('main.continue_reading') <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="post-share-btn-group">
-            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="{{ route('newspost', [$mainPost->category, $mainPost]) }}" class="font-pt">@lang('main.continue_reading') <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </div>

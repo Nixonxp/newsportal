@@ -20,17 +20,12 @@ class IndexController extends Controller
 
     public function index()
     {
-        $posts = Post::inRandomOrder()->with('category')->limit(5)->get();
-        $lastPosts = Post::orderBy('published_at', 'desc')->limit(10)->get();
-        $mainPost = $lastPosts->take(1)->first();
-        return view('index', compact('posts', 'lastPosts','mainPost'));
+        return view('index');
     }
 
     public function category(Category $category)
     {
-        $categoryNews = $this->newsRepository->getLastNewsByCategoryId($category->id);
-        $categoryNewsPaginate = $this->newsRepository->getLastNewsWithPaginateByCategoryId($category->id);
-        return view('category', compact('category','categoryNews', 'categoryNewsPaginate'));
+        return view('category', compact('category'));
     }
 
     public function newsPost(Category $category, Post $post)
