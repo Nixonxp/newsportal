@@ -6,9 +6,11 @@
 
 <section class="content">
     <!-- Default box -->
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <a class="btn btn-primary" href="{{ route('admin.categories.create') }}">@lang('admin.add_category')</a>
-    </nav>
+    @can('create', App\Models\Category::class)
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <a class="btn btn-primary" href="{{ route('admin.categories.create') }}">@lang('admin.add_category')</a>
+        </nav>
+    @endcan
 
     <div class="card">
         <div class="card-header">
@@ -50,9 +52,13 @@
                             {{ $category->id }}
                         </td>
                         <td>
-                            <a href="{{ route('admin.categories.show', $category) }}">
+                            @can('view', $category)
+                                <a href="{{ route('admin.categories.show', $category) }}">
+                                    {{ $category->name }}
+                                </a>
+                            @else
                                 {{ $category->name }}
-                            </a>
+                            @endcan
                         </td>
                         <td>
                             {{ $category->created_at }}
@@ -65,18 +71,21 @@
                             @endisset
                         </td>
                         <td class="project-actions text-right">
-
-
-                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                            @can('update', $category)
                                 <a class="btn btn-info btn-sm" href="{{ route('admin.categories.edit', $category) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     @lang('admin.edit')
                                 </a>
-                                @csrf
-                                @method('DELETE')
-                                <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
-                            </form>
+                            @endcan
+
+                            @can('delete', $category)
+                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

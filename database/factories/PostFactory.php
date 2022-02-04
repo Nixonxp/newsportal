@@ -23,6 +23,7 @@ class PostFactory extends Factory
     public function definition()
     {
         $title = Str::limit($this->faker->realText(), 50);
+        $isPublished = (random_int(1,10) > 1);
 
         $storagePath = storage_path($this->storage);
         if(!File::exists($storagePath)){
@@ -43,8 +44,8 @@ class PostFactory extends Factory
             'content' => $this->faker->realText(2000, 5),
             'main_slider' => (random_int(1,10) > 8),
             'popular' => (random_int(1,10) > 8),
-            'is_published' => (random_int(1,10) > 1),
-            'published_at'=> $this->faker->dateTimeBetween('-2 months', 'now'),
+            'is_published' => $isPublished,
+            'published_at'=> $isPublished ? $this->faker->dateTimeBetween('-2 months', 'now') : null,
         ];
     }
 

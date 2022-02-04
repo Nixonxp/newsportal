@@ -5,10 +5,16 @@ namespace App\Http\Controllers\News\Admin;
 use App\Http\Requests\NewsCategoryCreateRequest;
 use App\Http\Requests\NewsCategoryUpdateRequest;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends BaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->authorizeResource(Category::class, 'category');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,16 +62,16 @@ class CategoryController extends BaseController
      * Update the specified resource in storage.
      *
      * @param NewsCategoryUpdateRequest $request
-     * @param int $id
+     * @param Category $category
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(NewsCategoryUpdateRequest $request, int $id)
+    public function update(NewsCategoryUpdateRequest $request, Category $category)
     {
-        $item = Category::find($id);
+        $item = Category::find($category->id);
 
         if (empty($item)) {
             return back()
-                ->withErrors(['msg' => __('admin.record_id_not', ['id' => $id])])
+                ->withErrors(['msg' => __('admin.record_id_not', ['id' => $category->id])])
                 ->withInput();
         }
 

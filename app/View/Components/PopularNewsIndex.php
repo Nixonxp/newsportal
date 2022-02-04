@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 class PopularNewsIndex extends Component
 {
     public Collection $popularPosts;
-    public Post $popularPostsMain;
+    public ?Post $popularPostsMain = null;
 
     /**
      * Create a new component instance.

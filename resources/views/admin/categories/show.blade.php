@@ -75,16 +75,21 @@
                     </div>
 
                     <div class="text-center mt-5 mb-3">
-                        <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                        @can('update', $category)
                             <a class="btn btn-info btn-sm" href="{{ route('admin.categories.edit', $category) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 @lang('admin.edit')
                             </a>
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
-                        </form>
+                        @endcan
+
+                        @can('delete', $category)
+                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ class LatestNewsRibbon extends Component
      */
     public function __construct(NewsPostRepositoryInterface $newsPostRepository)
     {
-        $this->lastPosts = $newsPostRepository->getLastPublishedNews();
+        $this->lastPosts = $newsPostRepository->getLastPublishedNews(null, 10);
     }
 
     /**

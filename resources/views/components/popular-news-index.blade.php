@@ -1,5 +1,7 @@
 <div class="col-12 col-lg-9">
-    <x-news-card :mainPost="$popularPostsMain"></x-news-card>
+    @isset($popularPostsMain)
+        <x-news-card :mainPost="$popularPostsMain"></x-news-card>
+    @endisset
 
     @if($popularPosts->isNotEmpty())
         <div class="gazette-todays-post section_padding_100_50">

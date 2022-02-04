@@ -37,7 +37,7 @@ Route::group($groupData, function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('categories', CategoryController::class)
-        ->names('admin.categories')->middleware(['auth', 'roles:admin,Chief-editor']);
+        ->names('admin.categories')->middleware(['auth', 'roles:admin,Chief-editor,Editor']);
 
     Route::resource('posts', NewsController::class)
         ->names('admin.posts')->middleware(['auth', 'roles:admin,Chief-editor,editor']);

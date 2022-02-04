@@ -6,9 +6,11 @@
 
 <section class="content">
     <!-- Default box -->
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">@lang('admin.add_record')</a>
-    </nav>
+    @can('create', App\Models\Post::class)
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+            <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">@lang('admin.add_record')</a>
+        </nav>
+    @endcan
 
     <div class="card card-info">
         <form action="{{ route('admin.posts.index')}}" method="get" class="form-horizontal" >
@@ -29,7 +31,7 @@
                     <div class="col-sm-6">
                         <!-- select -->
                         <div class="form-group">
-                            <label for="status">@lang('admin.sort')</label>
+                            <label for="sort">@lang('admin.sort')</label>
                             <select class="form-control" name="sort" id="sort">
                                 <option value="">@lang('admin.default')</option>
                                 <option value="new" @if(request()->query('sort') === 'new') selected @endif>@lang('admin.first_new')</option>
@@ -48,7 +50,7 @@
 
         </form>
     </div>
-    @if ($posts->total() < 1)
+@if ($posts->total() < 1)
     <div class="card card-info">
         <div class="row">
             <h2>Список пуст</h2>
@@ -90,9 +92,13 @@
                         {{ $post->id }}
                     </td>
                     <td>
-                        <a href="{{ route('admin.posts.show', $post) }}">
+                        @can('view', $post)
+                            <a href="{{ route('admin.posts.show', $post) }}">
+                                {{ $post->title }}
+                            </a>
+                        @else
                             {{ $post->title }}
-                        </a>
+                        @endcan
                         <br>
                         <small>
                             @lang('admin.created_at') {{ $post->created_at }}
@@ -122,16 +128,20 @@
                     </td>
                     <td class="project-actions text-right">
 
-                        <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                        @can('update', $post)
                             <a class="btn btn-info btn-sm" href="{{ route('admin.posts.edit', $post) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 @lang('admin.edit')
                             </a>
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
-                        </form>
+                        @endcan
+                        @can('delete', $post)
+                            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-danger btn-sm" type="submit" value="@lang('admin.delete')">
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
