@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
+        $this->call(CurrencySeeder::class);
 
         Post::factory(50)->withCleanStorageFolder()->create();
     }
