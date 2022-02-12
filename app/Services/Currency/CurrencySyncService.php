@@ -6,12 +6,15 @@ use App\Dto\Currency\CurrencyDto;
 use App\Exceptions\ServiceException;
 use App\Models\Currency as Model;
 use Exception;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
 
 class CurrencySyncService
 {
+    use DatabaseTransactions;
+
     private Collection $lastCurrencies;
     private Collection $newDtoCurrencyData;
     private CurrencyDto $newBaseCurrency;
@@ -148,7 +151,7 @@ class CurrencySyncService
     {
         $firstRateCurrency = CurrencyService::convertFromTargetRateToOrigin($lastActualRecordYesterday->rate);
         $secondRateCurrency = CurrencyService::convertFromTargetRateToOrigin($item->rate);
-        return round(abs($firstRateCurrency - $secondRateCurrency), 2);
+        return round(abs($firstRateCurrency - $secondRateCurrency), 5);
     }
 
     /**

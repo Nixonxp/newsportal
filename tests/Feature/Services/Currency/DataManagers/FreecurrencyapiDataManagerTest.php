@@ -2,12 +2,16 @@
 
 namespace Tests\Feature\Services\Currency\DataManagers;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use App\Services\Currency\DataManagers\FreecurrencyapiDataManager;
 
 class FreecurrencyapiDataManagerTest extends TestCase
 {
+
+    use DatabaseTransactions;
+
     protected function setUp():void
     {
         parent::setUp();

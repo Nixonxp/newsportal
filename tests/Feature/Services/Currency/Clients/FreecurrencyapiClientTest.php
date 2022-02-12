@@ -4,11 +4,14 @@ namespace Tests\Feature\Services\Currency\Clients;
 
 use App\Exceptions\ServiceException;
 use App\Services\Currency\Clients\FreecurrencyapiClient;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use ReflectionClass;
 
 class FreecurrencyapiClientTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected function setUp(): void
     {
         parent::setUp();

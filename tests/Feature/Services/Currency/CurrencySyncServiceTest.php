@@ -32,7 +32,7 @@ class CurrencySyncServiceTest extends TestCase
 
     public function testTrendDifferenceValue()
     {
-        $expectResult = 2.65;
+        $expectResult = 2.65094;
         $lastActualRecordYesterday = Currency::where(
             'date',
             '=', \Illuminate\Support\Carbon::now()->yesterday()->toDateString()
@@ -60,14 +60,14 @@ class CurrencySyncServiceTest extends TestCase
                 [
                     'title' => 'USD',
                     'trend' => Currency::UP, //usd
-                    'trend_diff' => 2.65,
+                    'trend_diff' => 2.65094,
                 ]
             ],
             [
                 [
                     'title' => 'JPY',
                     'trend' => Currency::DOWN, //JPY
-                    'trend_diff' => 0.07,
+                    'trend_diff' => 0.07001,
                 ]
             ],
             [

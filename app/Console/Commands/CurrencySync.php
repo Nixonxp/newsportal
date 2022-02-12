@@ -40,6 +40,6 @@ class CurrencySync extends Command
     {
         $force = $this->option('force');
 
-        return (new SyncManager())->handle(null, $force);
+        return (new SyncManager())->handle(null, $force, true);
     }
 }

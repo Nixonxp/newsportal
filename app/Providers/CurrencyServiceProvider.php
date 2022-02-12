@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Services\Currency\Interfaces\CurrencyClientInterface;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Illuminate\Support\ServiceProvider;
 
 class CurrencyServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class CurrencyServiceProvider extends ServiceProvider
             $this->app->bind(CurrencyClientInterface::class, function() use ($apiClientClass){
                 return new $apiClientClass();
             });
+
+            $this->app->bind(ClientInterface::class, Client::class);
         }
     }
 

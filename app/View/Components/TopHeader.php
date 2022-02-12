@@ -3,22 +3,24 @@
 namespace App\View\Components;
 
 use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Services\Currency\CurrencyService;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class TopHeader extends Component
 {
     public Collection $posts;
-    public $stocks; // todo
+    public ?Collection $stocks;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository)
+    public function __construct(NewsPostRepositoryInterface $newsPostRepository, CurrencyService $currService)
     {
         $this->posts = $newsPostRepository->getLastPublishedNews(null, 12);
+        $this->stocks = $currService->getActualInfo()->chunk(3);
     }
 
     /**

@@ -13,12 +13,12 @@ class SyncManager
     /**
      * @throws Exception
      */
-    public function handle($baseCurrency = null, $force = false): bool
+    public function handle($baseCurrency = null, $force = false, bool $showResult = false): bool
     {
         try {
             $currencyDataCollection = $this->getCurrencyDtoCollection($baseCurrency);
             $result = (new CurrencySyncService($currencyDataCollection))->sync($force);
-            $this->toLog($result);
+            $this->toLog($result, $showResult);
         } catch (Throwable) {
             echo 'Error from sync service, please contact with administrator';
         }
@@ -54,16 +54,19 @@ class SyncManager
     }
 
     /**
-     * @param $result
+     * @param array $result
+     * @param bool $showResult
      * @return void
      */
-    protected function toLog($result): void
+    protected function toLog(array $result, bool $showResult): void
     {
         $message = !empty($result)
             ? 'Currency updated successful, result: ' . implode_r_key(', ', $result)
             : 'Currency update process is successful, data is not need updated';
 
-        echo $message . PHP_EOL;
+        if ($showResult) {
+            echo $message . PHP_EOL;
+        }
 
         Log::info($message);
     }

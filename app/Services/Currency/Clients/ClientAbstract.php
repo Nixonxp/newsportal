@@ -4,16 +4,17 @@ namespace App\Services\Currency\Clients;
 
 use App\Exceptions\ServiceException;
 use App\Services\Currency\Interfaces\CurrencyClientInterface;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class ClientAbstract implements CurrencyClientInterface
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
-    protected Client $client;
+    protected ClientInterface $client;
 
     /**
      * @var string
@@ -37,11 +38,12 @@ abstract class ClientAbstract implements CurrencyClientInterface
     }
 
     /**
-     * @return Client
+     * @return ClientInterface
+     * @throws BindingResolutionException
      */
-    protected function initClient(): Client
+    protected function initClient(): ClientInterface
     {
-        return new Client($this->clientParams);
+        return app()->make(ClientInterface::class, ['config' => $this->clientParams]);
     }
 
     /**
@@ -61,33 +63,14 @@ abstract class ClientAbstract implements CurrencyClientInterface
     protected function doRequest(): ResponseInterface
     {
         $this->type = mb_strtoupper($this->type);
-        $result = $this->client->request($this->getType(), $this->getBaseUrl() . $this->getEndpoint());
 
-        $code   = $result->getStatusCode();
-        $reason = $result->getReasonPhrase();
-
-        $this->checkRequestCode($code, $reason);
+        try {
+            $result = $this->client->request($this->getType(), $this->getBaseUrl() . $this->getEndpoint());
+        } catch (\Exception $e) {
+            throw new ServiceException($e);
+        }
 
         return $result;
-    }
-
-    /**
-     * @param int $code
-     * @param $reason
-     * @return bool
-     * @throws ServiceException
-     */
-    protected function checkRequestCode(int $code, $reason = null): bool
-    {
-        switch ($code) {
-            case 200:
-            case 201:
-                return true;
-            case 429:
-                throw new ServiceException('Rate-limit exception');
-            default:
-                throw new ServiceException('Exchange currency service error' . $code . ' ' . $reason);
-        }
     }
 
     /**
