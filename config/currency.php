@@ -1,7 +1,7 @@
 <?php
 return [
     /**
-     * supported services - freecurrencyapi
+     * supported services - freecurrencyapi,exchangerate
      */
     'default' => env('CURRENCY_SERVICE'),
     'base_currency' => 'RUB',
@@ -11,5 +11,8 @@ return [
 
     'freecurrencyapi' => [
         'api_key' => env('FREECURRENCY_API_KEY')
+    ],
+    'exchangerate' => [
+        'api_key' => env('EXCHANGERATE_API_KEY')
     ]
 ];
