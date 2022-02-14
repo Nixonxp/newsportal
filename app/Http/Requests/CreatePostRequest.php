@@ -14,9 +14,9 @@ class CreatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        /*if (Auth::user()->hasAnyRole(['admin', 'Chief-editor'])) {
+        if (Auth::user()?->hasAnyRole(['admin', 'Chief-editor', 'Editor'])) {
             return true;
-        }*/ // todo add roles moderate
+        }
 
         return true;
     }

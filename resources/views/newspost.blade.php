@@ -17,6 +17,24 @@
                             </div>
                             <h2 class="font-pt">{{ $post->title }}</h2>
                             <p>{{ $post->middleFormatDate }}</p>
+
+                            @isset($post->user)
+                                <div class="row article-author">
+                                    @isset($post->user->image)
+                                        <div class="col-md-1">
+                                            <div class="comment-author">
+                                                <img src="{{ Storage::url($post->user->image) }}" alt="">
+                                            </div>
+                                        </div>
+                                    @endisset
+                                    <div class="col-md-5 ml-4">
+                                        <h5>{{ $post->user->name }}</h5>
+                                        @auth
+                                            <button type="submit" class="btn btn-primary float-left">@lang('main.to_subscribe')</button>
+                                        @endauth
+                                    </div>
+                                </div>
+                            @endisset
                         </div>
                     </div>
                 </div>

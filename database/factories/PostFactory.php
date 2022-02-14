@@ -4,10 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\User;
 use File;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 use Str;
 
 class PostFactory extends Factory
@@ -38,7 +38,7 @@ class PostFactory extends Factory
                 return Category::inRandomOrder()->first()->id;
             },
             'user_id' => function () {
-                User::inRandomOrder()->first()->id;
+               return User::where('role_id', Role::where('name', 'Editor')->first()->id)->inRandomOrder()->first()->id;
             },
             'excerpt' => $this->faker->realText(120),
             'content' => $this->faker->realText(2000, 5),
