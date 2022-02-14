@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Category as Model;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use App\Services\Filters\NewsPostFilters;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -45,7 +44,7 @@ class CategoryRepository extends CoreRepository implements CategoryRepositoryInt
         return $result;
     }
 
-    public function getCategoriesMenu()
+    public function getCategoriesMenu(): Collection
     {
         $columns = [
             'id',

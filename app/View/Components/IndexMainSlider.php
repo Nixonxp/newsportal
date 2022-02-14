@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
@@ -16,9 +16,9 @@ class IndexMainSlider extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository)
+    public function __construct(PostRepositoryInterface $postRepository)
     {
-        $this->posts = $newsPostRepository->getLastMainSliderPosts();
+        $this->posts = $postRepository->getLastMainSliderPosts();
     }
 
     /**

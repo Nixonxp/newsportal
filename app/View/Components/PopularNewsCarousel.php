@@ -2,7 +2,9 @@
 
 namespace App\View\Components;
 
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -18,20 +20,20 @@ class PopularNewsCarousel extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository, int $categoryId = null)
+    public function __construct(PostRepositoryInterface $postRepository, int $categoryId = null)
     {
         $this->categoryId = $categoryId;
-        $this->posts = $newsPostRepository->getPopularRandomNewsOverPeriod(Carbon::now()->subMonths(2), 6, $this->categoryId);
+        $this->posts = $postRepository->getPopularRandomNewsOverPeriod(Carbon::now()->subMonths(2), 6, $this->categoryId);
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View|void
+     * @return Application|Factory|View|void
      */
     public function render()
     {
-        if ($this->posts->count() > 1) {
+        if ($this->posts->isNotEmpty()) {
             return view('components.popular-news-carousel');
         }
 

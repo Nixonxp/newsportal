@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Str;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
  * Model for news entities

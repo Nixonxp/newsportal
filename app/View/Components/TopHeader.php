@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use App\Services\Currency\CurrencyService;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
@@ -17,10 +17,10 @@ class TopHeader extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository, CurrencyService $currService)
+    public function __construct(PostRepositoryInterface $postRepository, CurrencyService $currService)
     {
-        $this->posts = $newsPostRepository->getLastPublishedNews(null, 12);
-        $this->stocks = $currService->getActualInfo()->chunk(3);
+        $this->posts = $postRepository->getLastPublishedNews(null, 12);
+        $this->stocks = $currService->getActualCachedInfo()->chunk(3);
     }
 
     /**

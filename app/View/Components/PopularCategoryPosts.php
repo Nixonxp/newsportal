@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
@@ -17,10 +17,10 @@ class PopularCategoryPosts extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository, int $categoryId = null)
+    public function __construct(PostRepositoryInterface $postRepository, int $categoryId = null)
     {
         $this->categoryId = $categoryId;
-        $this->posts = $newsPostRepository->getLastPublishedNews($this->categoryId, 5);
+        $this->posts = $postRepository->getLastPublishedNews($this->categoryId, 5);
     }
 
     /**

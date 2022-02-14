@@ -6,18 +6,19 @@ use App\Jobs\CurrencySync;
 use App\Models\Currency;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class CurrencyService
 {
     private string $baseCurrency;
     private array $currencyList;
+    private int $defaultCacheTime = 3600;
     private ?Currency $btcTargetCurrency = null;
 
     public function __construct()
     {
         $this->baseCurrency = config('currency.base_currency');
         $this->currencyList = explode(',', config('currency.currency_list'));
-        $this->getBtcConvertTargetData();
     }
 
     /**
@@ -63,6 +64,10 @@ class CurrencyService
                 return array_search($item->title, $this->currencyList, true);
             });
 
+        if (empty($this->btcTargetCurrency)) {
+            $this->getBtcConvertTargetData();
+        }
+
         if ($arActualInfo->isEmpty()) {
             CurrencySync::dispatch()->delay(now()->addSeconds(10));
             return $result;
@@ -89,5 +94,18 @@ class CurrencyService
         })->reject(function ($value) {
             return $value->code === $this->baseCurrency;
          });
+    }
+
+    public function getActualCachedInfo(): Collection
+    {
+        $value = Cache::tags('currency_cache_info')
+            ->remember(serialize([__METHOD__, self::class]),
+                $this->defaultCacheTime,
+                function () {
+                    return $this->getActualInfo();
+                }
+            );
+
+        return $value;
     }
 }

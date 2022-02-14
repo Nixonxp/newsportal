@@ -7,16 +7,16 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use App\Services\NewsPost\NewsPostService;
 use Illuminate\Http\Request;
 
 class NewsController extends BaseController
 {
-    private NewsPostRepositoryInterface $newsRepository;
+    private PostRepositoryInterface $newsRepository;
     private NewsPostService $newsPostService;
 
-    public function __construct(NewsPostRepositoryInterface $newsRepository, NewsPostService $newsPostService)
+    public function __construct(PostRepositoryInterface $newsRepository, NewsPostService $newsPostService)
     {
         parent::__construct();
 

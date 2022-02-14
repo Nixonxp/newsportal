@@ -3,14 +3,15 @@
 namespace App\View\Components;
 
 use App\Models\Post;
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 
 class NewsWidget extends Component
 {
-    private NewsPostRepositoryInterface $newsPostRepository;
+    private PostRepositoryInterface $postRepository;
     public Collection $lastPostsWeek;
     public Collection $lastPostsMonth;
 
@@ -19,25 +20,33 @@ class NewsWidget extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository)
+    public function __construct(PostRepositoryInterface $postRepository)
     {
-        $this->newsPostRepository = $newsPostRepository;
+        $this->postRepository = $postRepository;
         $this->setValues();
     }
 
     private function setValues():void
     {
-        $this->lastPostsWeek = $this->newsPostRepository->getPublishedNewsOverPeriod(Carbon::now()->subWeek(), 2);
+        $this->lastPostsWeek = $this->postRepository->getPublishedNewsOverPeriod(Carbon::now()->subWeek(), 2);
 
-        $this->lastPostsMonth = $this->newsPostRepository
-            ->getPublishedNewsOverPeriod(Carbon::now()->subMonth(), 3, null, true)
-            ->whereNotIn('id', $this->getExcludeIds($this->lastPostsWeek))
-            ->get();
+        $this->lastPostsMonth = Cache::tags('lastPostsMonth')
+            ->remember(serialize([__METHOD__, self::class,
+                'arguments' => [$this->lastPostsWeek],
+            ]),
+            config('cache.post_repository_cache_time') ?? 3600,
+            function () {
+                return $this->postRepository
+                            ->getPublishedNewsOverPeriod(Carbon::now()->subMonth(), 3, null, true)
+                            ->whereNotIn('id', $this->getExcludeIds($this->lastPostsWeek))
+                            ->get();
+            }
+        );
     }
 
     private function getExcludeIds(Collection $posts): array
     {
-        return $posts->map(function (Post $post, $key) {
+        return $posts->map(function (Post $post) {
             return $post->id;
         })->toArray();
     }

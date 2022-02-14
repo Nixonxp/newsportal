@@ -5,6 +5,7 @@ namespace App\Services\Currency;
 use App\Services\Currency\Interfaces\CurrencyDataManagerInterface;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Log;
 use Throwable;
 
@@ -18,12 +19,18 @@ class SyncManager
         try {
             $currencyDataCollection = $this->getCurrencyDtoCollection($baseCurrency);
             $result = (new CurrencySyncService($currencyDataCollection))->sync($force);
+            $this->resetCache();
             $this->toLog($result, $showResult);
         } catch (Throwable) {
             echo 'Error from sync service, please contact with administrator';
         }
 
         return true;
+    }
+
+    private function resetCache()
+    {
+        Cache::tags('currency_cache_info')->flush();
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Repositories\PostCachedRepository;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -13,6 +15,11 @@ class PostObserver
     {
         $this->setSlug($post);
         $this->setAuthor($post);
+    }
+
+    public function created(Post $post)
+    {
+        $this->forgetOldDataPostRepository($post);
     }
 
     private function setSlug(Post $post): void
@@ -36,6 +43,8 @@ class PostObserver
         if ($oldImageSource !== $post->image) {
             $this->deleteFileFromSource($oldImageSource);
         }
+
+        $this->forgetOldDataPostRepository($post);
     }
 
     /**
@@ -47,6 +56,13 @@ class PostObserver
     public function forceDeleted(Post $post)
     {
         $this->deleteImageFromEntity($post);
+
+        $this->forgetOldDataPostRepository($post);
+    }
+
+    public function deleted(Post $post)
+    {
+        $this->forgetOldDataPostRepository($post);
     }
 
     /**
@@ -57,6 +73,20 @@ class PostObserver
     {
         if (isset($post->image)) {
             Storage::delete($post->image);
+        }
+    }
+
+    private function forgetOldDataPostRepository(Post $post): void
+    {
+        if ($post->isPublished()) {
+            $repositoryMethods = array_map(function($value) {
+                return PostCachedRepository::class . $value;
+            },
+            get_class_methods(PostCachedRepository::class));
+
+            $repositoryMethods[] = 'lastPostsMonth';
+
+            Cache::tags($repositoryMethods)->flush();
         }
     }
 

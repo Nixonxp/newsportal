@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Post;
-use App\Repositories\Interfaces\NewsPostRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
@@ -17,10 +17,10 @@ class PopularNewsIndex extends Component
      *
      * @return void
      */
-    public function __construct(NewsPostRepositoryInterface $newsPostRepository)
+    public function __construct(PostRepositoryInterface $postRepository)
     {
 
-        $this->popularPosts = $newsPostRepository->getLastPopularPublishedNews(null, 3);
+        $this->popularPosts = $postRepository->getLastPopularPublishedNews(null, 3);
 
         if ($this->popularPosts->count() > 0) {
             $this->popularPostsMain = $this->popularPosts->pull(0);
