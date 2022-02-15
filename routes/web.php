@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\News\Admin\CategoryController;
 use App\Http\Controllers\News\Admin\NewsController;
+use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,11 @@ Route::group($groupData, function () {
     Route::resource('posts', NewsController::class)
         ->names('admin.posts')->middleware(['auth', 'roles:admin,Chief-editor,editor']);
 
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
+    Route::post('/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
 });
 
 Route::get('/', [IndexController::class, 'index'])->name('home');

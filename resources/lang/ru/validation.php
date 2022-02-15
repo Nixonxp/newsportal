@@ -137,5 +137,10 @@ return [
         'slug' => __('admin.code'),
         'description' => __('admin.description'),
         'title' => __('admin.title'),
-    ]
+    ],
+    'req_subscribe' => 'Не указана новость для подписки',
+    'req_invalid_param' => 'Некорректно указан параметр',
+    'subscribe_exists' => 'Данная новость не найдена',
+    'author_not_set' => 'Автор не установлен',
+    'already_subscribed' => 'Подписка уже оформлена',
 ];

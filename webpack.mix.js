@@ -22,6 +22,7 @@ mix.scripts([
     'resources/public/js/bootstrap.min.js',
     'resources/public/js/plugins.js',
     'resources/public/js/active.js',
+    'resources/public/js/custom.js',
     //'resources/public/js/map-active.js',
 ], 'public/js/public/app.js');
 

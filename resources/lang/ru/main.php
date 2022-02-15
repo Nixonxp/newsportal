@@ -18,4 +18,6 @@ return [
     'subscribe' => 'Подпишитесь',
     'to_subscribe' => 'Подписаться',
     'your_email' => 'Введите email',
+    'subscribe_success' => 'Подписка успешно оформлена',
+    'subscribed' => 'Вы подписаны',
 ];
