@@ -84,4 +84,18 @@ class SubscribeTest extends TestCase
             'author_id' => $authorId,
         ]);
     }
+
+    public function testSubscribeRecordNotFoundFail()
+    {
+        $this->expectExceptionMessage(__('validation.subscribe_not_exists'));
+        $this->expectException(ServiceException::class);
+        $this->service->unsubscribe($this->userId, $this->authorId);
+    }
+
+    public function testUnsubscribe()
+    {
+        $this->subscribeManually($this->userId, $this->authorId);
+        $result = $this->service->unsubscribe($this->userId, $this->authorId);
+        $this->assertTrue($result);
+    }
 }

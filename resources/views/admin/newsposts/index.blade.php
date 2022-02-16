@@ -53,7 +53,7 @@
 @if ($posts->total() < 1)
     <div class="card card-info">
         <div class="row">
-            <h2>Список пуст</h2>
+            <h2>@lang('admin.empty_list')</h2>
         </div>
     </div>
 @else

@@ -20,4 +20,10 @@ return [
     'your_email' => 'Введите email',
     'subscribe_success' => 'Подписка успешно оформлена',
     'subscribed' => 'Вы подписаны',
+    'unsubscribe' => 'Отменить подписку',
+    'unsubscribed' => 'Подписка отменена',
+    'personal_area' => 'Персональный кабинет',
+    'subscribe_authors' => 'Подписки',
+    'my_tape' => 'Моя лента',
+    'subscribe_date' => 'Подписка оформлена:',
 ];

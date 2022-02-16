@@ -7,6 +7,10 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
     $trail->push( __('admin.dashboard'), route('admin.dashboard'));
 });
 
+// Subscribers
+Breadcrumbs::for('admin.subscribes.index', function (BreadcrumbTrail $trail) {
+    $trail->push( __('admin.subscribes'), route('admin.subscribes.index'));
+});
 
 /**
  * Categories

@@ -143,4 +143,6 @@ return [
     'subscribe_exists' => 'Данная новость не найдена',
     'author_not_set' => 'Автор не установлен',
     'already_subscribed' => 'Подписка уже оформлена',
+    'subscribe_author_not_found' => 'Автор не найден',
+    'subscribe_not_exists' => 'Подписка не найдена',
 ];

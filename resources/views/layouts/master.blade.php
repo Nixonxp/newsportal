@@ -90,9 +90,9 @@
     @endisset
 </header>
 <!-- Header Area End -->
-
+@yield('personal_layout_head')
 @yield('content')
-
+@yield('personal_layout_footer')
 <!-- Footer Area Start -->
 <footer class="footer-area bg-img background-overlay">
     <!-- Top Footer Area -->

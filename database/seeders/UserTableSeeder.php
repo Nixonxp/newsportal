@@ -69,7 +69,7 @@ class UserTableSeeder extends Seeder
                     'email' => 'editor3@example.com',
                     'password' => bcrypt('cmanager123'),
                     'role_id' => Role::where('name', 'Editor')->first()->id,
-                    'image' => '`userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
                 ],
             ]
         );

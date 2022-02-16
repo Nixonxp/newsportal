@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('view-admin-subscribers', function() {
+            return \Auth::user()?->hasAnyRole(['Admin', 'Chief-editor']);
+        });
     }
 }

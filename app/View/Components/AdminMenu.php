@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\Component;
 
 class AdminMenu extends Component
@@ -25,10 +26,13 @@ class AdminMenu extends Component
 
         foreach ($item as $arItem) {
 
-            if (!empty($arItem['viewPolicy'])) {
-                if (!\Auth::user()->can($arItem['viewPolicy'][0], $arItem['viewPolicy'][1])) {
-                    continue;
-                }
+            if (!empty($arItem['viewPolicy']) ? !\Auth::user()?->can($arItem['viewPolicy'][0],
+                    $arItem['viewPolicy'][1]) : false) {
+                        continue;
+                    }
+
+            if (!empty($arItem['gate']) ? !Gate::allows($arItem['gate']) : false) {
+                continue;
             }
 
             $arItem['text'] = !empty($arItem['text_lang']) ? __($arItem['text_lang']) : $arItem['text'];

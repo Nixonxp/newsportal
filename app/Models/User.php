@@ -51,6 +51,18 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function scopeWithAuthorRoles($query)
+    {
+       $roleIds = Role::select('id')
+           ->whereIn('name', ['Chief-editor', 'Editor'])
+           ->get()
+           ->map(function($role) {
+               return $role->id;
+           })->toArray();
+
+        return $query->whereIn('role_id', $roleIds);
+    }
+
     /**
      * Check of roles entry of user
      *

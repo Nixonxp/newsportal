@@ -37,5 +37,15 @@ return [
             'active' => 'admin.posts.*',
             'viewPolicy' => ['viewAny', App\Models\Post::class],
         ],
+    ],
+    'admin.services' => [
+        [
+            'link' => 'admin.subscribes.index',
+            'text_lang' => 'admin.subscribes',
+            'icon' => 'fas fa-envelope',
+            'angle_left' => false,
+            'active' => 'admin.subscribes.*',
+            'gate' => 'view-admin-subscribers'
+        ]
     ]
 ];

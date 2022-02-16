@@ -37,6 +37,21 @@ class SubscribeService
     }
 
     /**
+     * @param int $userId
+     * @param int $authorId
+     * @return bool
+     * @throws ServiceException
+     */
+    public function unsubscribe(int $userId, int $authorId): bool
+    {
+        if (!$this->checkSubscribe($userId, $authorId)) {
+            throw new ServiceException(__('validation.subscribe_not_exists'));
+        }
+
+        return (bool)Subscriber::withSubscriber($userId)->withAuthor($authorId)->delete();
+    }
+
+    /**
      * @param int $postId
      * @return bool
      */
