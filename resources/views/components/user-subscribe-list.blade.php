@@ -15,7 +15,7 @@
                 </div>
             </div>
         @empty
-            <h2>@lang('admin.empty_list')</h2>
+            <span>@lang('admin.empty_list_authors')</span>
         @endforelse
     </div>
 </div>

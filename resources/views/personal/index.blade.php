@@ -5,5 +5,5 @@
 @section('personal_layout_footer',view('partials.blocks.personal_layout_footer'))
 
 @section('content')
-
+    <x-subscribe-news-list></x-subscribe-news-list>
 @endsection

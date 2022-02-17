@@ -13,7 +13,8 @@ class Subscriber extends Model
 
     protected $fillable = [
         'user_id',
-        'author_id'
+        'author_id',
+        'created_at',
     ];
 
     public function scopeWithSubscriber($query, $subscriberId)

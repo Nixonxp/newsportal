@@ -26,5 +26,17 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['layouts.master'], CategoriesComposer::class);
+
+        View::composer(['layouts.master'], function($view) {
+            $personalRoute = 'login';
+
+            if(\Auth::user()?->hasAnyRole(['Admin','Chief-editor', 'Editor'])) {
+                $personalRoute = 'admin.dashboard';
+            } elseif(\Auth::check()) {
+                $personalRoute = 'personal.index';
+            }
+
+            $view->with(['personalRoute' => $personalRoute]);
+        });
     }
 }

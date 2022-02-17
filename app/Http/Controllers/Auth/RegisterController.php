@@ -34,7 +34,11 @@ class RegisterController extends Controller
 
     protected function redirectTo()
     {
-        $routeName = 'admin.dashboard'; // todo redirect from roles
+        if (\Auth::user()?->hasAnyRole(['Admin','Chief-editor', 'Editor'])) {
+            $routeName = 'admin.dashboard';
+        } else {
+            $routeName = 'personal.index';
+        }
 
         return route($routeName);
     }

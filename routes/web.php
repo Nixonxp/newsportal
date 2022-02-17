@@ -33,7 +33,7 @@ Route::get( '/logout', [ LoginController::class, 'logout' ] )->name('get-logout'
  */
 $groupData = [
     'prefix' => 'admin',
-    'middleware' => ['auth', 'roles:admin,Chief-editor,Editor']
+    'middleware' => ['auth', 'roles:admin,Chief-editor,Editor', 'throttle:60,1']
 ];
 Route::group($groupData, function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -48,7 +48,7 @@ Route::group($groupData, function () {
 
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'throttle:60,1'])->group(function () {
     Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
     Route::post('/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
 

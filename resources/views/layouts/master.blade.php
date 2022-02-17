@@ -76,7 +76,7 @@
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </div>
                                 <div id="userhbtn">
-                                    <a href="{{ route('login') }}">
+                                    <a href="{{ route($personalRoute) }}">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </a>
                                 </div>
