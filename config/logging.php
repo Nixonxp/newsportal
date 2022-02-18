@@ -110,6 +110,22 @@ return [
             'handler' => NullHandler::class,
         ],
 
+        'database' => [
+            'driver' => 'custom',
+            'via' => danielme85\LaravelLogToDB\LogToDbHandler::class,
+            'level' => env('APP_LOG_LEVEL', 'debug'),
+            'name' => 'Custom',
+            'connection' => 'default',
+            'collection' => 'log',
+            'detailed' => true,
+            'queue' => true,
+            'queue_name' => '',
+            'queue_connection' => '',
+            'processors' => [
+                //Monolog\Processor\HostnameProcessor::class
+            ]
+        ],
+
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],

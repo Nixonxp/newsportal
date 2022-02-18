@@ -47,5 +47,15 @@ return [
             'active' => 'admin.subscribes.*',
             'gate' => 'view-admin-subscribers'
         ]
+    ],
+    'admin.system' => [
+        [
+            'link' => 'admin.logs.index',
+            'text_lang' => 'admin.logs',
+            'icon' => 'far fa-circle text-warning',
+            'angle_left' => false,
+            'active' => 'admin.logs.index',
+            'viewPolicy' => ['viewAny', App\Models\Log::class],
+        ],
     ]
 ];

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Services\Currency\Clients;
 
-use App\Exceptions\ServiceException;
 use App\Services\Currency\Clients\ClientAbstract;
 use App\Services\Currency\Interfaces\CurrencyClientInterface;
 use GuzzleHttp\Client;
@@ -13,6 +12,7 @@ use GuzzleHttp\Psr7\Response;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use ReflectionClass;
 use Tests\TestCase;
+use Throwable;
 
 class ClientAbstractTest extends TestCase
 {
@@ -41,7 +41,7 @@ class ClientAbstractTest extends TestCase
         $objClientAbstract = $this->getMockClientResponse($code);
 
         if ($expectException) {
-            $this->expectException(ServiceException::class);
+            $this->expectException(Throwable::class);
         }
 
         $type = 'get';

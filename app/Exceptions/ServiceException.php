@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class ServiceException extends Exception
 {
@@ -13,6 +14,6 @@ class ServiceException extends Exception
      */
     public function report(Exception $exception)
     {
-        \Log::error('New error in service check this - ' . $exception);
+        Log::channel('database')->warning($exception);
     }
 }

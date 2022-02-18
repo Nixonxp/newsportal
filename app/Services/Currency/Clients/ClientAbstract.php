@@ -63,13 +63,7 @@ abstract class ClientAbstract implements CurrencyClientInterface
     protected function doRequest(): ResponseInterface
     {
         $this->type = mb_strtoupper($this->type);
-
-        try {
-            $result = $this->client->request($this->getType(), $this->getBaseUrl() . $this->getEndpoint());
-        } catch (\Exception $e) {
-            throw new ServiceException($e);
-        }
-
+        $result = $this->client->request($this->getType(), $this->getBaseUrl() . $this->getEndpoint());
         return $result;
     }
 

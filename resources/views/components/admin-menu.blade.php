@@ -1,7 +1,9 @@
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         @forelse($menu as $keySectionName => $menuItem)
-            <li class="nav-header">{{__($keySectionName)}}</li>
+            @if (!empty($menuItem))
+                <li class="nav-header">{{__($keySectionName)}}</li>
+            @endif
             @forelse($menuItem as $menuItemLv1)
                 <li class="nav-item {{ $menuItemLv1['active'] ? 'menu-open' : '' }}">
                     <a href="{{ $menuItemLv1['link'] }}" class="nav-link {{ $menuItemLv1['active'] ? 'active' : '' }}">

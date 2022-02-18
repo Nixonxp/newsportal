@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\News\Admin\CategoryController;
 use App\Http\Controllers\News\Admin\NewsController;
 use App\Http\Controllers\Personal\PersonalController;
@@ -46,6 +47,9 @@ Route::group($groupData, function () {
 
     Route::get('/subscribes', [AdminController::class, 'subscribes'])->name('admin.subscribes.index');
 
+    Route::get('/logs', [LogController::class, 'index'])->name('admin.logs.index');
+    Route::get('/logs/{id}', [LogController::class, 'show'])->name('admin.logs.show');
+    Route::delete('/logs/{id}', [LogController::class, 'destroy'])->name('admin.logs.destroy');
 });
 
 Route::middleware(['auth', 'throttle:60,1'])->group(function () {

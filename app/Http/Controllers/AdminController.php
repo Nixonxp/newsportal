@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubscriberListRequest;
+use App\Http\Requests\LogListRequest;
 use App\Models\Subscriber;
 use App\Models\User;
 
@@ -28,7 +28,7 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function subscribes(SubscriberListRequest $request)
+    public function subscribes(LogListRequest $request)
     {
         $subscribers = Subscriber::select('id', 'user_id', 'author_id', 'created_at')
             ->when($request->author, function ($query) use ($request) {

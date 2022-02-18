@@ -63,6 +63,18 @@ class User extends Authenticatable
         return $query->whereIn('role_id', $roleIds);
     }
 
+    public function scopeWithAdminRole($query)
+    {
+       $roleIds = Role::select('id')
+           ->whereIn('name', ['Admin'])
+           ->get()
+           ->map(function($role) {
+               return $role->id;
+           })->toArray();
+
+        return $query->whereIn('role_id', $roleIds);
+    }
+
     /**
      * Check of roles entry of user
      *

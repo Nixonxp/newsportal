@@ -2,11 +2,13 @@
 
 namespace App\Services\Currency;
 
+use App\Exceptions\ServiceException;
+use App\Jobs\ProccessSendAdminEmail;
 use App\Services\Currency\Interfaces\CurrencyDataManagerInterface;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class SyncManager
@@ -21,14 +23,23 @@ class SyncManager
             $result = (new CurrencySyncService($currencyDataCollection))->sync($force);
             $this->resetCache();
             $this->toLog($result, $showResult);
-        } catch (Throwable) {
-            echo 'Error from sync service, please contact with administrator';
+        } catch (ServiceException $exception) {
+            echo $exception . PHP_EOL;
+        } catch (Throwable $exception) {
+            Log::channel('database')->critical($exception);
+            ProccessSendAdminEmail::dispatch((object)[
+                'message' => __('admin.service_currency_error')
+            ])->delay(5);
+            echo 'Error from sync service, please contact with administrator' . PHP_EOL;
         }
 
         return true;
     }
 
-    private function resetCache()
+    /**
+     * @return void
+     */
+    private function resetCache(): void
     {
         Cache::tags('currency_cache_info')->flush();
     }
@@ -41,7 +52,6 @@ class SyncManager
     protected function getCurrencyDtoCollection($baseCurrency): Collection
     {
         $managerClass = $this->getDataManagerFromConfig();
-
         return (new $managerClass)->getCurrencyDto($baseCurrency);
     }
 
@@ -75,6 +85,6 @@ class SyncManager
             echo $message . PHP_EOL;
         }
 
-        Log::info($message);
+        Log::channel('database')->info($message);
     }
 }

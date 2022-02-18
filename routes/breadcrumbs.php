@@ -12,6 +12,16 @@ Breadcrumbs::for('admin.subscribes.index', function (BreadcrumbTrail $trail) {
     $trail->push( __('admin.subscribes'), route('admin.subscribes.index'));
 });
 
+// logs
+Breadcrumbs::for('admin.logs.index', function (BreadcrumbTrail $trail) {
+    $trail->push( __('admin.logs'), route('admin.logs.index'));
+});
+
+Breadcrumbs::for('admin.logs.show', function (BreadcrumbTrail $trail, $id) {
+    $trail->parent("admin.logs.index");
+    $trail->push( __('admin.element_detail'), route('admin.logs.show', $id));
+});
+
 /**
  * Categories
  */
