@@ -404,15 +404,22 @@ $(document).ready(function () {
 
 var newsApp = {
     subscribeBtnUd : document.getElementById('subscribe_btn'),
+    unsubscribeBtnUd : document.querySelectorAll('#unsubscribe_btn'),
 
     init: function () {
         // init scripts
     },
 
     listenAction: function () {
-        let subscribe = this.subscribeBtnUd;
-        if (subscribe) {
-            subscribe.addEventListener("click", this.subscribeAction);
+
+        if (this.subscribeBtnUd) {
+            this.subscribeBtnUd.addEventListener("click", this.subscribeAction);
+        }
+
+        if (this.unsubscribeBtnUd !== undefined) {
+            this.unsubscribeBtnUd.forEach((elem)=>{
+                elem.addEventListener("click", this.unsubscribeAction.bind(null, null, elem), false);
+            })
         }
     },
 
@@ -426,17 +433,56 @@ var newsApp = {
             }
         };
 
+        newsApp.subscribeBtnUd.disabled = true;
+
         newsApp.request(arParams, function (response, fail = false) {
             if (!fail) {
                 newsApp.subscribeBtnUd.textContent = response.message;
-                newsApp.subscribeBtnUd.disabled = true;
             } else {
-                if ((errorMsg = response.responseJSON.errors.postId
-                    || response.responseJSON.errors[0]) !== undefined) {
-                    alert(errorMsg)
-                }
+                alert(newsApp.getErrorMessage(response));
+                newsApp.subscribeBtnUd.disabled = false;
             }
         });
+    },
+
+    unsubscribeAction: function (f, ev) {
+        let authorId = ev.dataset.authorId;
+
+        var arParams = {
+            'action' : '/unsubscribe',
+            'data' : {
+                authorId: authorId
+            }
+        };
+
+        ev.disabled = true;
+
+        newsApp.request(arParams, function (response, fail = false) {
+            if (!fail) {
+                ev.textContent = response.message;
+            } else {
+                alert(newsApp.getErrorMessage(response));
+                ev.disabled = false;
+            }
+        });
+    },
+
+    getErrorMessage: function (response){
+        if (Array.isArray(response.responseJSON.errors)) {
+            var firstKey = Object.keys(data)[0];
+            return response.responseJSON.errors[firstKey];
+        }
+
+        if (response.responseJSON.errors !== undefined) {
+            var firstError = Object.keys(response.responseJSON.errors)[0];
+            return response.responseJSON.errors[firstError][0];
+        }
+
+        if(response.responseJSON.message !== undefined) {
+            return response.responseJSON.message;
+        }
+
+        return 'Server error, please try later.';
     },
 
     request: function(params, callback) {

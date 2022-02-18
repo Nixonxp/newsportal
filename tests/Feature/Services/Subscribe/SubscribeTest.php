@@ -5,15 +5,16 @@ namespace Tests\Feature\Services\Subscribe;
 use App\Exceptions\ServiceException;
 use App\Models\Post;
 use App\Models\Role;
-use App\Models\Subscriber;
 use App\Models\User;
 use App\Services\Subscribe\SubscribeService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Carbon;
+use Tests\Subscribes;
 use Tests\TestCase;
 
 class SubscribeTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseTransactions, Subscribes;
 
     protected function setUp():void
     {
@@ -28,7 +29,7 @@ class SubscribeTest extends TestCase
             ->first()->id;
 
         $this->newPostIdWithAuthor = Post::factory(1)->create([
-            'user_id' => $this->authorId
+            'user_id' => $this->authorId,
         ])->first()->id;
     }
 
@@ -77,14 +78,6 @@ class SubscribeTest extends TestCase
         $this->assertTrue($resultTrueSubAuthor);
     }
 
-    private function subscribeManually(int $userId, int $authorId): void
-    {
-        $subscribeAction = Subscriber::create([
-            'user_id' => $userId,
-            'author_id' => $authorId,
-        ]);
-    }
-
     public function testSubscribeRecordNotFoundFail()
     {
         $this->expectExceptionMessage(__('validation.subscribe_not_exists'));
@@ -97,5 +90,61 @@ class SubscribeTest extends TestCase
         $this->subscribeManually($this->userId, $this->authorId);
         $result = $this->service->unsubscribe($this->userId, $this->authorId);
         $this->assertTrue($result);
+    }
+
+    public function testGetSubscribersByPostId()
+    {
+        $this->createPosts();
+        $postId = Post::select('id')->where('title', '1')->first()->id;
+        $this->subscribeManually($this->userId, $this->authorId);
+
+        $resultSubscribers = $this->service->getSubscribersByPostId($postId)->first();
+        $user = User::find($this->userId);
+
+        $this->assertEquals(
+            [
+                'user_id' => $resultSubscribers->user_id,
+                'user_email' => $resultSubscribers->user_email,
+                'user_name' => $resultSubscribers->user_name,
+            ],
+            [
+                'user_id' => $this->userId,
+                'user_email' => $user->email,
+                'user_name' => $user->name,
+            ]
+        );
+    }
+
+    protected function createPosts(): void
+    {
+        $postData = [
+            [
+                'title' => '1',
+                'user_id' => $this->authorId,
+                'is_published' => true,
+                'published_at' => Carbon::createFromDate(2022, 01, 24)->toDateString(),
+                'image' => null,
+                "slug" => "1",
+                "category_id" => 3,
+                "excerpt" => 'excerpt',
+                "content" => 'content',
+            ],
+            [
+                'title' => '2',
+                'user_id' => $this->authorId,
+                'is_published' => false,
+                'published_at' => Carbon::createFromDate(2022, 01, 23)->toDateString(),
+                'image' => null,
+                "slug" => "2",
+                "category_id" => 3,
+                "excerpt" => 'excerpt',
+                "content" => 'content',
+            ],
+        ];
+        array_map(function($value) {
+            $post = Post::create($value);
+        }, $postData);
+
+        return;
     }
 }

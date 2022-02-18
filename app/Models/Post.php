@@ -115,7 +115,7 @@ class Post extends Model
 
     public function scopeNowPublished($query)
     {
-        return $query->published()->where('published_at', '<', now());
+        return $query->published()->where('published_at', '<=', now());
     }
 
     public function scopePopular($query)

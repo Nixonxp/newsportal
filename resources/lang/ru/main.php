@@ -26,4 +26,5 @@ return [
     'subscribe_authors' => 'Подписки',
     'my_tape' => 'Моя лента',
     'subscribe_date' => 'Подписка оформлена:',
+    'sub_author_posted_new_post' => 'Опубликована новая статья из вашей подписки',
 ];

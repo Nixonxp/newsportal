@@ -9,7 +9,6 @@ class NewsPostDto
     public int $category_id;
     public string $excerpt;
     public string $content;
-    public ?int $user_id = null;
     public ?bool $is_published = null;
     public ?bool $main_slider = false;
     public ?bool $popular = false;

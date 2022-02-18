@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PostPublicatedEvent;
+use App\Listeners\SubscribeMailListener;
 use App\Models\Category;
 use App\Models\Post;
 use App\Observers\CategoryObserver;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        PostPublicatedEvent::class => [
+            SubscribeMailListener::class
+        ]
     ];
 
     /**
