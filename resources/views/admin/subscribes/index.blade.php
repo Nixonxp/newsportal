@@ -15,7 +15,7 @@
                         <!-- select -->
                         <div class="form-group">
                             <label for="author">@lang('admin.author')</label>
-                            <select class="form-control" name="author" id="author">
+                            <select class="form-control custom-select" name="author" id="author">
                                 <option value="">@lang('admin.all')</option>
                                 @foreach($authors as $author)
                                     <option value="{{$author->id}}" @if(request()->query('author') == $author->id) selected @endif>{{$author->name}}</option>

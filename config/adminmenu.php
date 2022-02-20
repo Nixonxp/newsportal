@@ -57,5 +57,13 @@ return [
             'active' => 'admin.logs.index',
             'viewPolicy' => ['viewAny', App\Models\Log::class],
         ],
+        [
+            'link' => 'admin.users.index',
+            'text_lang' => 'admin.users',
+            'icon' => 'far fa-user',
+            'angle_left' => false,
+            'active' => 'admin.users.*',
+            'viewPolicy' => ['viewAny', App\Models\User::class],
+        ],
     ]
 ];

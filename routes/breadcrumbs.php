@@ -23,29 +23,29 @@ Breadcrumbs::for('admin.logs.show', function (BreadcrumbTrail $trail, $id) {
 });
 
 /**
- * Categories
+ * Resources
  */
 
 Breadcrumbs::macro('resource', function (string $name, string $title, string $elementName) {
-    // Admin > Categories
+    // Admin > Elements
     Breadcrumbs::for("{$name}.index", function (BreadcrumbTrail $trail) use ($name, $title) {
         $trail->parent('admin.dashboard');
         $trail->push($title, route("{$name}.index"));
     });
 
-    // Admin > Categories > New
+    // Admin > Elements > New
     Breadcrumbs::for("{$name}.create", function (BreadcrumbTrail $trail) use ($name) {
         $trail->parent("{$name}.index");
         $trail->push(__('admin.create'), route("{$name}.create"));
     });
 
-    // Admin > Categories > Post 123
+    // Admin > Elements > Element 123
     Breadcrumbs::for("{$name}.show", function (BreadcrumbTrail $trail, $model) use ($name, $elementName) {
         $trail->parent("{$name}.index");
         $trail->push($elementName, route("{$name}.show", $model));
     });
 
-    // Admin > Categories > Post 123 > Edit
+    // Admin > Elements > Element 123 > Edit
     Breadcrumbs::for("{$name}.edit", function (BreadcrumbTrail $trail, $model) use ($name) {
         $trail->parent("{$name}.show", $model);
         $trail->push(__('admin.edit'), route("{$name}.edit", $model));
@@ -54,3 +54,4 @@ Breadcrumbs::macro('resource', function (string $name, string $title, string $el
 
 Breadcrumbs::resource('admin.categories', __('admin.categories'), __('admin.category_detail'));
 Breadcrumbs::resource('admin.posts', __('admin.news'), __('admin.singlenews_detail'));
+Breadcrumbs::resource('admin.users', __('admin.users'), __('admin.user_detail'));

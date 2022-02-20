@@ -18,10 +18,10 @@ class CheckRoles
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (Auth::user()->hasAnyRole($roles)) {
+        if (Auth::user()?->hasAnyRole($roles)) {
             return $next($request);
         }
 
-        return response(false, 403);
+        return abort(403, __('main.access_denied'));
     }
 }

@@ -20,7 +20,7 @@
                         <!-- select -->
                         <div class="form-group">
                             <label for="status">@lang('admin.status')</label>
-                            <select class="form-control" name="status" id="status">
+                            <select class="form-control custom-select" name="status" id="status">
                                 <option value="">@lang('admin.all')</option>
                                 <option value="publicated" @if(request()->query('status') === 'publicated') selected @endif>@lang('admin.published')</option>
                                 <option value="draft" @if(request()->query('status') === 'draft') selected @endif>@lang('admin.draft')</option>
@@ -32,7 +32,7 @@
                         <!-- select -->
                         <div class="form-group">
                             <label for="sort">@lang('admin.sort')</label>
-                            <select class="form-control" name="sort" id="sort">
+                            <select class="form-control custom-select" name="sort" id="sort">
                                 <option value="">@lang('admin.default')</option>
                                 <option value="new" @if(request()->query('sort') === 'new') selected @endif>@lang('admin.first_new')</option>
                                 <option value="old" @if(request()->query('sort') === 'old') selected @endif>@lang('admin.first_old')</option>

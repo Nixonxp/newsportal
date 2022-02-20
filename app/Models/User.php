@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Services\Filters\QueryFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'image',
     ];
 
     /**
@@ -44,11 +47,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function scopeFilter(Builder $builder, QueryFilter $filters): Builder
+    {
+        return $filters->apply($builder);
     }
 
     public function scopeWithAuthorRoles($query)
@@ -65,14 +73,12 @@ class User extends Authenticatable
 
     public function scopeWithAdminRole($query)
     {
-       $roleIds = Role::select('id')
-           ->whereIn('name', ['Admin'])
-           ->get()
-           ->map(function($role) {
-               return $role->id;
-           })->toArray();
+       $roleAdminId = Role::select('id')
+           ->admin()
+           ->first()
+           ->id;
 
-        return $query->whereIn('role_id', $roleIds);
+        return $query->where('role_id', $roleAdminId);
     }
 
     /**

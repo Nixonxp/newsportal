@@ -13,7 +13,7 @@
                         <!-- select -->
                         <div class="form-group">
                             <label for="type">@lang('admin.type')</label>
-                            <select class="form-control" name="type" id="type">
+                            <select class="form-control custom-select" name="type" id="type">
                                 <option value="">@lang('admin.all')</option>
                                 <option value="CRITICAL" @if(request()->query('type') === 'CRITICAL') selected @endif>@lang('admin.important')</option>
                                 <option value="WARNING" @if(request()->query('type') === 'WARNING') selected @endif>@lang('admin.warning')</option>

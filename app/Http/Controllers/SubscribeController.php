@@ -31,7 +31,7 @@ class SubscribeController extends Controller
 
         } catch(\Throwable $e) {
 
-            Log::error($e->getMessage());
+            Log::channel('database')->critical($e->getMessage());
 
             return response()->json([
                 'errors' => __('errors.server_error')
@@ -56,7 +56,7 @@ class SubscribeController extends Controller
 
         } catch(\Throwable $e) {
 
-            Log::error($e->getMessage());
+            Log::channel('database')->critical($e->getMessage());
 
             return response()->json([
                 'errors' => __('errors.server_error')

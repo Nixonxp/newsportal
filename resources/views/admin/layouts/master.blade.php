@@ -128,6 +128,7 @@
         <!-- Main content -->
         <section class="content">
             @include('partials.blocks.messages-action')
+            @include('partials.blocks.errors')
             @yield('content')
         </section>
         <!-- /.content -->
