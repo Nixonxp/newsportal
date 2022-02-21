@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrencySeeder::class);
 
         Post::factory(50)->withCleanStorageFolder()->create();
+
+        $this->call(AdsSeeder::class);
     }
 }

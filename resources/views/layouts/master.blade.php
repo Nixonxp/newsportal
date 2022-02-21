@@ -37,9 +37,7 @@
                 </div>
                 <!-- Header Advert Area -->
                 <div class="col-12 col-md-8">
-                    <div class="header-advert-area">
-                        <a href="#"><img src="/img/top-advert.png" alt="header-add"></a>
-                    </div>
+                    <x-ad-header></x-ad-header>
                 </div>
             </div>
         </div>

@@ -30,6 +30,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <!-- select -->
+                        <div class="form-group">
+                            <label for="sort">@lang('admin.sort')</label>
+                            <select class="form-control custom-select" name="sort" id="sort">
+                                <option value="">@lang('admin.default')</option>
+                                <option value="new" @if(request()->query('sort') === 'new') selected @endif>@lang('admin.id_asc')</option>
+                                <option value="old" @if(request()->query('sort') === 'old') selected @endif>@lang('admin.id_desc')</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -92,7 +103,7 @@
             </thead>
             <tbody>
             @foreach($users as $user)
-                @php /** @var \App\Models\Post $user */  @endphp
+                @php /** @var \App\Models\User $user */  @endphp
                 <tr>
                     <td>
                         {{ $user->id }}

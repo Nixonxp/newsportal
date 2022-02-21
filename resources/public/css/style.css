@@ -65,3 +65,13 @@ form input:not([type=range],[type=checkbox],[type=search]) {
 .h2-personal {
     width: 100%;
 }
+
+.header-advert-area img {
+    max-width: 728px;
+    max-height: 90px;
+}
+
+.advert-widget img {
+    max-width: 255px;
+    max-height: 293px;
+}

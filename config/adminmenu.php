@@ -46,6 +46,14 @@ return [
             'angle_left' => false,
             'active' => 'admin.subscribes.*',
             'gate' => 'view-admin-subscribers'
+        ],
+        [
+            'link' => 'admin.ads.index',
+            'text_lang' => 'admin.ads',
+            'icon' => 'fas fa-ad',
+            'angle_left' => false,
+            'active' => 'admin.ads.*',
+            'viewPolicy' => ['viewAny', App\Models\Ad::class],
         ]
     ],
     'admin.system' => [
@@ -64,6 +72,6 @@ return [
             'angle_left' => false,
             'active' => 'admin.users.*',
             'viewPolicy' => ['viewAny', App\Models\User::class],
-        ],
+        ]
     ]
 ];

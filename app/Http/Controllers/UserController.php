@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserListRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\AdListRequest;
+use App\Http\Requests\AdCreateRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Services\Filters\UserFilters;
+use App\Services\Filters\AdFilters;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,11 +24,12 @@ class UserController extends Controller
      *
      * @return View
      */
-    public function index(UserListRequest $request): View
+    public function index(AdListRequest $request): View
     {
-        $filters = (new UserFilters($request));
+        $filters = (new AdFilters($request));
         $users = User::select('id', 'name', 'email', 'role_id', 'created_at', 'updated_at')
                         ->filter($filters)
+                        ->with('role')
                         ->paginate(50);
 
         $roles = Role::select('id', 'name')->get();
@@ -105,7 +106,7 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(UserUpdateRequest $request, User $user): RedirectResponse
+    public function update(AdCreateRequest $request, User $user): RedirectResponse
     {
         $error = false;
         $requestArray = $request->validated();

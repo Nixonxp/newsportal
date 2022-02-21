@@ -55,3 +55,4 @@ Breadcrumbs::macro('resource', function (string $name, string $title, string $el
 Breadcrumbs::resource('admin.categories', __('admin.categories'), __('admin.category_detail'));
 Breadcrumbs::resource('admin.posts', __('admin.news'), __('admin.singlenews_detail'));
 Breadcrumbs::resource('admin.users', __('admin.users'), __('admin.user_detail'));
+Breadcrumbs::resource('admin.ads', __('admin.ads'), __('admin.ad_detail'));

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
@@ -48,6 +49,9 @@ Route::group($groupData, function () {
 
     Route::resource('users', UserController::class)
         ->names('admin.users')->middleware(['auth', 'roles:admin']);
+
+    Route::resource('ads', AdController::class)
+        ->names('admin.ads')->middleware(['auth', 'roles:admin']);
 
     Route::get('/subscribes', [AdminController::class, 'subscribes'])->name('admin.subscribes.index');
 

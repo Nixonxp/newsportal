@@ -21,27 +21,8 @@
 
                     <x-news-widget></x-news-widget>
 
-                    <!-- Advert Widget -->
-                    <div class="advert-widget">
-                        <div class="widget-title">
-                            <h5>@lang('main.advert')</h5>
-                        </div>
-                        <div class="advert-thumb mb-30">
-                            <a href="#"><img src="img/add.png" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Subscribe Widget -->
-                    <div class="subscribe-widget">
-                        <div class="widget-title">
-                            <h5>@lang('main.subscribe')</h5>
-                        </div>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="email" name="email" id="subs_email" placeholder="@lang('main.your_email')">
-                                <button type="submit">@lang('main.to_subscribe')</button>
-                            </form>
-                        </div>
-                    </div>
+                    <x-ad-sidebar></x-ad-sidebar>
+
                 </div>
             </div>
         </div>

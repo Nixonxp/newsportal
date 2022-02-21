@@ -137,6 +137,8 @@ return [
         'slug' => __('admin.code'),
         'description' => __('admin.description'),
         'title' => __('admin.title'),
+        'showdate_start' => __('admin.show_start_date'),
+        'showdate_end' => __('admin.show_end_date'),
     ],
     'req_subscribe' => 'Не указана новость для подписки',
     'req_invalid_param' => 'Некорректно указан параметр',
