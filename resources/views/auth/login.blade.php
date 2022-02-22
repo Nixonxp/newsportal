@@ -7,6 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                @include('partials.blocks.messages-action')
                 <div class="card-header">{{ __('auth.auth_login') }}</div>
 
                 <div class="card-body">

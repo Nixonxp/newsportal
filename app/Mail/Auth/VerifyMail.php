@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Auth;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNotifyMailer extends Mailable
+class VerifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private object $data;
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(object $data)
+    public function __construct(User $user)
     {
-        $this->data = $data;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +31,8 @@ class AdminNotifyMailer extends Mailable
      */
     public function build()
     {
-        return $this->subject(__('admin.sub_author_posted_new_post'))
-            ->view('emails.admin', ['data' => $this->data]);
+        return $this
+            ->subject(__('auth.signup_confirmation'))
+            ->markdown('emails.auth.verify');
     }
 }

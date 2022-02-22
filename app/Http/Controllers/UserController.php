@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdCreateRequest;
 use App\Http\Requests\AdListRequest;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserListRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\Filters\UserFilters;
@@ -24,7 +26,7 @@ class UserController extends Controller
      *
      * @return View
      */
-    public function index(AdListRequest $request): View
+    public function index(UserListRequest $request): View
     {
         $filters = (new UserFilters($request));
         $users = User::select('id', 'name', 'email', 'role_id', 'created_at', 'updated_at')
@@ -106,7 +108,7 @@ class UserController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    public function update(AdCreateRequest $request, User $user): RedirectResponse
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $error = false;
         $requestArray = $request->validated();

@@ -30,6 +30,6 @@ class SubscribePostMailer extends Mailable
     public function build()
     {
         return $this->subject(__('admin.sub_author_posted_new_post'))
-            ->view('email.subscribe', ['data' => $this->data]);
+            ->view('emails.subscribe', ['data' => $this->data]);
     }
 }

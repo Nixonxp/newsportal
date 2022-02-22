@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\News\Admin\CategoryController;
@@ -26,10 +27,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes([
     'reset' => false,
     'confirm' => false,
-    'verify' => false
 ]);
 
 Route::get( '/logout', [ LoginController::class, 'logout' ] )->name('get-logout');
+Route::get('/verify/{token}', [ RegisterController::class, 'verify' ] )->name('register.verify');
 
 /**
  * Admin
