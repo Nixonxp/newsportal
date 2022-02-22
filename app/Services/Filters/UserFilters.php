@@ -30,8 +30,9 @@ class UserFilters extends QueryFilter
     public function sort($value = null)
     {
         return match ($value) {
-            'old' => $this->builder->orderBy('id' ,'DESC'),
-            'new' => $this->builder->orderBy('id' ,'ASC'),
+            'id_desc' => $this->builder->orderBy('id' ,'DESC'),
+            'id_asc' => $this->builder->orderBy('id' ,'ASC'),
+            'updated_new' => $this->builder->orderBy('updated_at' ,'DESC'),
             default => $this->builder->orderBy('id' ,'ASC'),
         };
     }

@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Post as Model;
 use App\Repositories\Interfaces\PostRepositoryInterface;
-use App\Services\Filters\AdFilters;
+use App\Services\Filters\NewsPostFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -83,7 +83,7 @@ class PostRepository extends CoreRepository implements PostRepositoryInterface
 
     public function getNewsPostsWithFilterPaginate($request, ?int $perPage = null): Collection|LengthAwarePaginator
     {
-        $filters = (new AdFilters($request));
+        $filters = (new NewsPostFilters($request));
         return $this
             ->startConditions()
             ->filter($filters)

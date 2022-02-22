@@ -36,8 +36,8 @@
                             <label for="sort">@lang('admin.sort')</label>
                             <select class="form-control custom-select" name="sort" id="sort">
                                 <option value="">@lang('admin.default')</option>
-                                <option value="new" @if(request()->query('sort') === 'new') selected @endif>@lang('admin.id_asc')</option>
-                                <option value="old" @if(request()->query('sort') === 'old') selected @endif>@lang('admin.id_desc')</option>
+                                <option value="id_asc" @if(request()->query('sort') === 'id_asc') selected @endif>@lang('admin.id_asc')</option>
+                                <option value="id_desc" @if(request()->query('sort') === 'id_desc') selected @endif>@lang('admin.id_desc')</option>
                             </select>
                         </div>
                     </div>

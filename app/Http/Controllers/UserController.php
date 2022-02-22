@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\AdListRequest;
 use App\Http\Requests\AdCreateRequest;
+use App\Http\Requests\AdListRequest;
+use App\Http\Requests\UserCreateRequest;
 use App\Models\Role;
 use App\Models\User;
-use App\Services\Filters\AdFilters;
+use App\Services\Filters\UserFilters;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index(AdListRequest $request): View
     {
-        $filters = (new AdFilters($request));
+        $filters = (new UserFilters($request));
         $users = User::select('id', 'name', 'email', 'role_id', 'created_at', 'updated_at')
                         ->filter($filters)
                         ->with('role')

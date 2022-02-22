@@ -9,8 +9,8 @@ class AdFilters extends QueryFilter
     public function sort($value = null)
     {
         return match ($value) {
-            'old' => $this->builder->orderBy('id' ,'DESC'),
-            'new' => $this->builder->orderBy('id' ,'ASC'),
+            'old' => $this->builder->orderBy('id' ,'asc'),
+            'new' => $this->builder->orderBy('id' ,'desc'),
             default => $this->builder->orderBy('id' ,'ASC'),
         };
     }
