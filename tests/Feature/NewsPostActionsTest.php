@@ -99,29 +99,6 @@ class NewsPostActionsTest extends TestCase
     }
 
     /**
-     * Throw exception if not set slug
-     * in time of update
-     *
-     * @return void
-     */
-    public function testUpdatePostFailure(): void
-    {
-        $this->createAuthorizeUserWithRole('Editor');
-
-        $stubDto = $this->getMockDto();
-        $itemNews = $this->newsPostService->createNewsPost($stubDto);
-
-
-        $newStubDto = $this->getMockDto([
-            'slug' => null, // <- null slug
-        ]);
-
-        $this->expectException(QueryException::class);
-
-        $this->newsPostService->updateNewsPostWithId($itemNews->id, $newStubDto);
-    }
-
-    /**
      * check deleting image after in 2 scenarios
      * 1. softdelete (image will be deleted)
      * 2. forcedelete (image will deleted from disk)

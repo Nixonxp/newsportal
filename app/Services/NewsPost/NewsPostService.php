@@ -26,7 +26,7 @@ class NewsPostService
      */
     public function updateNewsPostWithId(int $id, NewsPostDto $dto):bool
     {
-        return $this->newsRepository->getEdit($id)->update($dto->toArray());
+        return $this->newsRepository->getEdit($id)->update(arrayNullFilters($dto->toArray()));
     }
 
     /**

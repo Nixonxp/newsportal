@@ -57,7 +57,7 @@
                                         <a class="nav-link" href="{{ route('home') }}">@lang('main.today')</a>
                                     </li>
                                     @foreach($categories as $category)
-                                        <li class="nav-item {{ Helper::classActiveSegment(2, $category->slug) }}">
+                                        <li class="nav-item {{ classActiveSegment(2, $category->slug) }}">
                                             <a class="nav-link" href="{{ route('category', $category) }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach

@@ -2,7 +2,9 @@
 
 @foreach($posts as $post)
     <div class="single-breaking-news-widget">
-        <img src="{{ Storage::url($post->image) }}" alt="">
+        @if($post->getImageSrc() !== null)
+            <img src="{{ $post->getImageSrc() }}" alt="{{ $post->title }}">
+        @endif
         <div class="breakingnews-title">
             <p>{{ $post->category->name }}</p>
         </div>

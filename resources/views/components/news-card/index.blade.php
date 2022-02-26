@@ -9,10 +9,10 @@
     <p class="gazette-post-date">{{ $mainPost->middleFormatDate }}</p>
     <!-- Post Thumbnail -->
     <div class="blog-post-thumbnail my-5">
-        <img src="{{ Storage::url($mainPost->image) }}" alt="post-thumb">
+        <img src="{{ $mainPost->getImageSrc() }}" alt="post-thumb">
     </div>
     <!-- Post Excerpt -->
-    <p>{{ $mainPost->excerpt }}</p>
+    <p>{!! $mainPost->excerpt !!}</p>
     <!-- Reading More -->
     <div class="post-continue-reading-share d-sm-flex align-items-center justify-content-between mt-30">
         <div class="post-continue-btn">

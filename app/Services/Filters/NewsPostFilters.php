@@ -14,6 +14,7 @@ class NewsPostFilters extends QueryFilter
             'publicated' => $this->builder->where('is_published', true)->whereNull('deleted_at'),
             'draft' => $this->builder->where('is_published', false)->whereNull('deleted_at'),
             'deleted' => $this->builder->onlyTrashed(),
+            'external' => $this->builder->external(),
             default => null,
         };
     }

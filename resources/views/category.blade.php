@@ -15,7 +15,7 @@
                     <div class="gazette-post-tag">
                         <a href="javascript:void();">{{ $category->name }}</a>
                     </div>
-                    <p class="editorial-post-date text-dark mb-0">{{ Helper::getCurrentDate() }}</p>
+                    <p class="editorial-post-date text-dark mb-0">{{ getCurrentDate() }}</p>
                 </div>
             </div>
         </div>

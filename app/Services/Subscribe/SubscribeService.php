@@ -64,7 +64,7 @@ class SubscribeService
 
         $post = Post::where('id', $postId)->published()->nowPublished()->first();
 
-        if (empty($post)) {
+        if (empty($post) || empty($post->user_id)) {
             return false;
         }
 

@@ -31,3 +31,45 @@ if(!function_exists('getMiddleFormatDateAttribute'))
         return Str::ucfirst(Date::parse($date)->format('F d, Y'));
 	}
 }
+
+if(!function_exists('arrayNullFilters'))
+{
+	function arrayNullFilters(array $array) :array
+	{
+        $filter = function($var) {
+            return ($var !== null);
+        };
+
+        return array_filter($array, $filter);
+	}
+}
+
+if(!function_exists('getCurrentDate'))
+{
+    function getCurrentDate()
+    {
+        return Str::ucfirst(Date::parse(now())->format('F d, Y'));
+    }
+}
+
+if(!function_exists('classActivePath'))
+{
+    function classActivePath($path)
+    {
+        return Request::is($path) ? ' active' : '';
+    }
+}
+
+if(!function_exists('classActiveSegment'))
+{
+    function classActiveSegment($segment, $value)
+    {
+        if(!is_array($value)) {
+            return Request::segment($segment) == $value ? ' active' : '';
+        }
+        foreach ($value as $v) {
+            if(Request::segment($segment) == $v) return ' active';
+        }
+        return '';
+    }
+}

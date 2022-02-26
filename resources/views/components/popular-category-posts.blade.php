@@ -10,11 +10,13 @@
                 <h2 class="font-pt">{{ $post->title }}</h2>
                 <p class="gazette-post-date">{{ $post->middleFormatDate }}</p>
                 <!-- Post Thumbnail -->
-                <div class="blog-post-thumbnail my-5">
-                    <img src="{{ Storage::url($post->image) }}" alt="post-thumb">
-                </div>
+                @if($post->getImageSrc() !== null)
+                    <div class="blog-post-thumbnail my-5">
+                        <img src="{{ $post->getImageSrc() }}" alt="{{ $post->title }}">
+                    </div>
+                @endif
                 <!-- Post Excerpt -->
-                <p>{{ $post->excerpt }}</p>
+                <p>{!! $post->excerpt !!}</p>
                 <!-- Reading More -->
                 <div class="post-continue-reading-share mt-30">
                     <div class="post-continue-btn">

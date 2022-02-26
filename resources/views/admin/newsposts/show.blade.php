@@ -64,11 +64,11 @@
                                 <tr>
                                     <td>@lang('admin.image')</td>
                                     <td>
-                                        @isset($post->image)
-                                            <img width="250px" height="250px" src="{{ Storage::url($post->image) }}" alt="">
+                                        @if($post->getImageSrc() !== null)
+                                            <img width="250px" height="250px" src="{{ $post->getImageSrc() }}" alt="">
                                         @else
                                             {!! __('admin.label_not_uploaded') !!}
-                                        @endisset
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -79,6 +79,18 @@
                                     <td>@lang('admin.text')</td>
                                     <td>{{ $post->getContent() }}</td>
                                 </tr>
+
+                                @if($post->isExternal())
+                                    <tr>
+                                        <td>@lang('admin.news_source_name')</td>
+                                        <td>{{ $post->source_name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@lang('admin.news_source_link')</td>
+                                        <td>{{ $post->source_link }}</td>
+                                    </tr>
+                                @endif
 
                                 </tbody>
                             </table>
@@ -115,6 +127,14 @@
                                 </span>
                             </b>
                         </p>
+                        @if($post->isExternal())
+                            <p class="text-sm">@lang('admin.is_external')
+                                <b class="d-block">
+                                    {!! __('admin.label_true') !!}
+                                </b>
+                            </p>
+
+                        @endif
                     </div>
 
                     <div class="text-center mt-5 mb-3">
