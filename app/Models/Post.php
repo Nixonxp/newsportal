@@ -32,6 +32,10 @@ class Post extends Model
         'popular',
         'main_slider',
         'content',
+        'source_name',
+        'source_link',
+        'source_image',
+        'partner_news',
     ];
 
     /**

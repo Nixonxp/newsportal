@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'status',
         'password',
         'role_id',
         'image',
@@ -85,6 +86,16 @@ class User extends Authenticatable
            ->id;
 
         return $query->where('role_id', $roleAdminId);
+    }
+
+    public function scopeWithChiefEditorRole($query)
+    {
+       $roleEditorId = Role::select('id')
+           ->chiefEditor()
+           ->first()
+           ->id;
+
+        return $query->where('role_id', $roleEditorId);
     }
 
     /**

@@ -3,14 +3,13 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNotifyMailer extends Mailable
+class ChiefEditorNotifyMailer extends Mailable
 {
     use Queueable, SerializesModels;
-
-    private object $data;
 
     /**
      * Create a new message instance.
@@ -30,6 +29,6 @@ class AdminNotifyMailer extends Mailable
     public function build()
     {
         return $this->subject(__('admin.site_new_notify', ['site' => env('APP_NAME')]))
-            ->view('emails.admin', ['data' => $this->data]);
+            ->view('emails.chiefeditor', ['data' => $this->data]);
     }
 }

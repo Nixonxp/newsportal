@@ -5,6 +5,7 @@ namespace App\Services\NewsPost;
 use App\Dto\NewsPost\NewsPostDto;
 use App\Models\Post as Model;
 use App\Repositories\Interfaces\PostRepositoryInterface;
+use stdClass;
 
 class NewsPostService
 {
@@ -35,5 +36,25 @@ class NewsPostService
     public function createNewsPost(NewsPostDto $dto): Model
     {
         return (new Model())->create($dto->toArray());
+    }
+
+    /**
+     * @param NewsPostDto $dto
+     * @return stdClass
+     */
+    public function findFromTitleOrCreate(NewsPostDto $dto): stdClass
+    {
+        $result = new stdClass();
+        $result->status = 'created';
+
+        if (!empty($findModel = Model::select('id')->where('title', $dto->title)->first())) {
+            $result->status = 'found';
+            $result->id = $findModel->id;
+        } else {
+            $record = $this->createNewsPost($dto);
+            $result->id = $record->id;
+        }
+
+        return $result;
     }
 }

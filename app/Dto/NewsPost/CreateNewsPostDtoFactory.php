@@ -13,7 +13,7 @@ class CreateNewsPostDtoFactory
     {
         $requestArray = $request->validated();
         if ($request->has('image')) {
-            $imagePath = $request->file('image')->store(config('filesystems.local_paths.news_images'));
+            $imagePath = $request->file('image')?->store(config('filesystems.local_paths.news_images'));
             $requestArray['image'] = $imagePath;
         }
 
