@@ -42,7 +42,11 @@ class SubscribeTest extends TestCase
 
     public function testNotFoundNotSetAuthorFail()
     {
-        $newPostId = Post::whereNull('user_id')->first()->id;
+        $newPostId = Post::factory(1)->create([
+            'user_id' => null,
+            'is_published' => true,
+            'published_at' => null,
+        ])->first()->id;
 
         $this->expectException(ServiceException::class);
         $this->expectExceptionMessage(__('validation.author_not_set'));
