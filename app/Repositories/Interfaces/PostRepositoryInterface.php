@@ -30,4 +30,6 @@ interface PostRepositoryInterface
     public function getPublishedNewsOverPeriod(Carbon $period, int $limit = 20, int $category = null, $getWithBuilder = false): Collection|Builder;
 
     public function getPopularRandomNewsOverPeriod(Carbon $period, int $limit = 20, int $category = null): Collection;
+
+    public function search(string $query = ''): \Illuminate\Support\Collection;
 }

@@ -64,8 +64,8 @@
                                 </ul>
                                 <!-- Search Form -->
                                 <div class="header-search-form mr-auto">
-                                    <form action="#">
-                                        <input type="search" placeholder="@lang('main.search_placeholder')" id="search" name="search">
+                                    <form action="{{ route('search') }}">
+                                        <input type="search" placeholder="@lang('main.search_placeholder')" id="search" name="q">
                                         <input class="d-none" type="submit" value="submit">
                                     </form>
                                 </div>

@@ -31,9 +31,10 @@ jobs:
           - 6379/tcp
         options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         php-versions: ['8.0']
+        elastic: ['7.11.0']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -61,6 +62,17 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Configure sysctl limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+          - name: Runs Elasticsearch
+            uses: elastic/elastic-github-actions/elasticsearch@master
+            with:
+              stack-version: ${{ matrix.elastic }}
 
       - name: Set required directory permissions
         run: chmod -R 777 storage bootstrap/cache

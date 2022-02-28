@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\Filters\QueryFilter;
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,14 +13,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Str;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
  * Model for news entities
  */
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Searchable;
 
     protected $fillable = [
         'title',

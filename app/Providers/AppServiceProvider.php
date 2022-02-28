@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Date\Date;
 use Laravel\Dusk\DuskServiceProvider;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }
+
+        $this->bindSearchClient();
     }
 
     /**
@@ -50,6 +54,15 @@ class AppServiceProvider extends ServiceProvider
 
                 return collect($value)->recursive($depth, ($currentLayer + 1));
             });
+        });
+    }
+
+    private function bindSearchClient()
+    {
+        $this->app->bind(Client::class, function ($app) {
+            return ClientBuilder::create()
+                ->setHosts($app['config']->get('services.search.hosts'))
+                ->build();
         });
     }
 }

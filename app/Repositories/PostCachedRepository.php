@@ -164,4 +164,9 @@ class PostCachedRepository implements PostRepositoryInterface
 
         return $value;
     }
+
+    public function search(?string $query = ''): \Illuminate\Support\Collection
+    {
+        return $this->postRepository->search($query);
+    }
 }

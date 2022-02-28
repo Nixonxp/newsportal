@@ -69,7 +69,8 @@ Route::middleware(['auth', 'throttle:60,1'])->group(function () {
     Route::get('/personal/authors', [PersonalController::class, 'subscribeList'])->name('personal.authors');
 });
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/category/{category:slug}', [IndexController::class, 'category'])->name('category');
 Route::get('/category/{category:slug}/post/{post:slug}', [IndexController::class, 'newsPost'])->name('newspost');
+Route::get('/search', [IndexController::class, 'search'])->name('search')->middleware('throttle:60,1');
+Route::get('/', [IndexController::class, 'index'])->name('home');
 

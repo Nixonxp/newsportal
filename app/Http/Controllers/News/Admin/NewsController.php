@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 use App\Services\NewsPost\NewsPostService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends BaseController
 {
@@ -104,6 +105,7 @@ class NewsController extends BaseController
             $result = $this->newsPostService->updateNewsPostWithId($post->id, $dtoNewsPost);
 
         } catch(\Throwable $e) {
+            Log::channel('database')->critical($e->getMessage());
             return back()
                 ->withErrors(['warning' => __('admin.save_error')])
                 ->withInput();

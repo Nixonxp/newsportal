@@ -64,6 +64,7 @@ return [
     'published' => 'Опубликован',
     'add_category' => 'Добавить категорию',
     'category' => 'Категория',
+    'search' => 'Поиск',
     'category_detail' => 'Детальная категории',
     'create_category' => 'Создать категорию',
     'edit_category' => 'Редактировать категорию: :name',
