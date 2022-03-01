@@ -95,7 +95,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">@lang('admin.save')</button>
+                <button type="submit" id="save" class="btn btn-primary">@lang('admin.save')</button>
             </div>
         </form>
     </div>

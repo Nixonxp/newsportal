@@ -29,7 +29,12 @@ abstract class ClientAbstract implements ApiClientInterface
     /**
      * @var array
      */
-    private array $clientParams = [];
+    protected array $clientParams = [];
+
+    /**
+     * @var bool
+     */
+    protected bool $disableQM = false;
 
     /**
      * @var array
@@ -143,7 +148,9 @@ abstract class ClientAbstract implements ApiClientInterface
         }
 
         if (!empty($queryParams)) {
-            $this->endpoint .= '?';
+
+            $this->endpoint .= $this->disableQM ? '&' : '?';
+
             $i = 0;
             foreach ($queryParams as $paramKey => $endpoint) {
                 $amp = $i++ !== 0 ? '&' : '';

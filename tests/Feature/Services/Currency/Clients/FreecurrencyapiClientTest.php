@@ -44,13 +44,15 @@ class FreecurrencyapiClientTest extends TestCase
 
     /**
      * @dataProvider dataQuery
-     * @param $params
+     * @param $queryParams
      * @param $expectResult
      * @return void
+     * @throws ServiceException
      */
-    public function testQueryBuilder($params, $expectResult)
+    public function testQueryBuilder($queryParams, $expectResult)
     {
-        $this->clientObj->queryWithParams($params);
+        $pathParams = [];
+        $this->clientObj->queryWithParams($pathParams, $queryParams);
         $endpoint = $this->callProtectedMethod($this->clientObj, 'getEndpoint');
         $this->assertEquals($expectResult, $endpoint);
     }

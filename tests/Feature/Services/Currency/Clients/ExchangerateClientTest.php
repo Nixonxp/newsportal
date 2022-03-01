@@ -31,12 +31,12 @@ class ExchangerateClientTest extends TestCase
     {
         return [
             [
-                ['param' => 'value'], '/param/value'
+                ['param', 'value'], '/param/value'
             ],
             [
                 [
-                    'param' => 'value',
-                    'param2' => 'value2',
+                    'param', 'value',
+                    'param2', 'value2',
                 ],
                 '/param/value/param2/value2'
             ],
@@ -45,13 +45,15 @@ class ExchangerateClientTest extends TestCase
 
     /**
      * @dataProvider dataQuery
-     * @param $params
+     * @param $pathParams
      * @param $expectResult
      * @return void
+     * @throws ServiceException
      */
-    public function testQueryBuilder($params, $expectResult)
+    public function testQueryBuilder($pathParams, $expectResult)
     {
-        $this->clientObj->queryWithParams($params);
+        $queryParams = [];
+        $this->clientObj->queryWithParams($pathParams, $queryParams);
         $endpoint = $this->callProtectedMethod($this->clientObj, 'getEndpoint');
         $this->assertEquals($expectResult, $endpoint);
     }

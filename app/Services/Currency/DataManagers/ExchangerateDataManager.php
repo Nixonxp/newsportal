@@ -5,6 +5,7 @@ namespace App\Services\Currency\DataManagers;
 use App;
 use App\Dto\Currency\CurrencyDto;
 use App\Exceptions\ServiceException;
+use App\Services\ApiClient\Interfaces\ApiClientInterface;
 use App\Services\Currency\Interfaces\CurrencyClientInterface;
 use App\Services\Currency\Interfaces\CurrencyDataManagerInterface;
 use Illuminate\Support\Carbon;
@@ -15,7 +16,7 @@ use Illuminate\Support\Collection;
  */
 class ExchangerateDataManager implements CurrencyDataManagerInterface
 {
-    private CurrencyClientInterface $client;
+    private ApiClientInterface $client;
     private string $baseCurrency;
     private array $currencyList;
 
@@ -42,11 +43,14 @@ class ExchangerateDataManager implements CurrencyDataManagerInterface
     {
         $type = 'get';
 
-        $queryParam = [
-            'latest' => $this->baseCurrency
+        $queryParams = [];
+
+        $pathParams = [
+            'latest',
+            $this->baseCurrency
         ];
 
-        return $this->client->queryWithParams($queryParam, $type)->exec();
+        return $this->client->queryWithParams($pathParams, $queryParams, $type)->exec();
     }
 
     /**

@@ -10,7 +10,6 @@ use Tests\DuskTestCase;
 
 class UserListTest extends DuskTestCase
 {
-    use DatabaseTransactions;
 
     protected function setUp():void
     {
@@ -63,8 +62,10 @@ class UserListTest extends DuskTestCase
         $admin = $this->admin;
 
         $this->browse(function (Browser $browser) use ($admin) {
-            $browser->loginAs($admin)
+            $browser->resize(1920, 3000)
+                ->loginAs($admin)
                 ->visitRoute('admin.users.edit', $admin)
+                ->pause(500)
                 ->assertSee(__('admin.edit_record', ['name' => $admin->name]))
                 ->assertValue('input#name', $admin->name)
                 ->assertValue('input#email', $admin->email)
@@ -78,10 +79,11 @@ class UserListTest extends DuskTestCase
         $admin = $this->admin;
 
         $this->browse(function (Browser $browser) use ($admin) {
-            $browser->loginAs($admin)
+            $browser->resize(1920, 3000)
+                ->loginAs($admin)
                 ->visitRoute('admin.users.edit', $admin)
                 ->type('input#name', $admin->name . '1')
-                ->press(__('admin.save'))
+                ->click('#save')
                 ->assertSee(__('admin.save_success'))
                 ->assertValue('input#name', $admin->name . '1')
                 ->assertValue('input#email', $admin->email)

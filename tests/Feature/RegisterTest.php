@@ -29,7 +29,7 @@ class RegisterTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee(__('auth.registration_success_check_verify_email'));
 
-        $user = User::where('email', $email)->first();
+        $user = $this->getUserFromEmail($email);
 
         $this->assertEquals($userRoleId, $user->role_id);
         $this->assertEquals(User::STATUS_INACTIVE, $user->status);
@@ -47,7 +47,7 @@ class RegisterTest extends TestCase
         $email = $this->faker->email;
         $password = $this->faker->password;
         $responseRegister = $this->getRegisterUserResponse($email, $password);
-        $user = User::where('email', $email)->first();
+        $user = $this->getUserFromEmail($email);
 
         $responseVerify = $this->followingRedirects()->get('/verify/' . $user->verify_token);
         $responseVerify->assertStatus(200);
@@ -69,7 +69,8 @@ class RegisterTest extends TestCase
         $email = $this->faker->email;
         $password = $this->faker->password;
         $responseRegister = $this->getRegisterUserResponse($email, $password);
-        $user = User::where('email', $email)->first();
+
+        $user = $this->getUserFromEmail($email);
 
         $responseVerify = $this->followingRedirects()->get('/verify/' . $user->verify_token . '1');
         $responseVerify->assertStatus(200);
@@ -97,6 +98,18 @@ class RegisterTest extends TestCase
                 'password' => $password,
                 'password_confirmation' => $password,
             ]);
+    }
+
+    private function getUserFromEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        // fix eloquent with http requests
+        if ($user === null) {
+            $user = User::where('email', $email)->first();
+        }
+
+        return $user;
     }
 
     private function getLoginUserResponse(string $email, string $password): TestResponse
