@@ -63,11 +63,4 @@ class ExchangerateClientTest extends TestCase
         $this->expectException(ServiceException::class);
         $this->clientObj->queryWithParams([]);
     }
-
-    protected function callProtectedMethod($object, $method, array $args=array()) {
-        $class = new ReflectionClass(get_class($object));
-        $method = $class->getMethod($method);
-        $method->setAccessible(true);
-        return $method->invokeArgs($object, $args);
-    }
 }
