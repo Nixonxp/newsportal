@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta charset="UTF-8">
-    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,6 +11,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
+    <meta name="keywords" content="@yield('meta_keywords', __('main.meta_keywords'))">
+    <meta name="description" content="@yield('meta_description', __('main.meta_description'))">
+    <link rel="canonical" href="{{url()->current()}}"/>
 
     <!-- Favicon  -->
     <link rel="icon" href="favicon.ico">

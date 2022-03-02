@@ -29,4 +29,9 @@ return [
     'sub_author_posted_new_post' => 'Опубликована новая статья из вашей подписки',
     'site_new_notify' => 'Уведомление с сайта :site',
     'access_denied' => 'Доступ запрещен',
+    'meta_keywords' => 'Новости, события, проишествия',
+    'meta_description' => 'События в мире и России. Новости 24 часа',
+    'meta_category' => 'Новости категории :category',
+    'meta_post' => 'Новость :post',
+    'meta_search' => 'Поиск новостей',
 ];

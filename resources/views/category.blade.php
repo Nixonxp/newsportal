@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title', __('admin.category') . ' ' . $category->name)
+@section('meta_description', __('main.meta_category', ['category' => $category->name]))
 
 @section('content')
 

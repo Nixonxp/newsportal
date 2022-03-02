@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('title', $post->title . __('admin.news'))
+@section('meta_description', __('main.meta_post', ['post' => $post->title]))
+
 @php /** @var \App\Models\Post $post */  @endphp
 
 @section('content')

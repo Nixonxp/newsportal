@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('title', __('admin.search'))
+@section('meta_description', __('main.meta_search'))
 
 @section('content')
     <div class="container py-5">
