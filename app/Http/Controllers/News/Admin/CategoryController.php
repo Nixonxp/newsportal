@@ -5,6 +5,11 @@ namespace App\Http\Controllers\News\Admin;
 use App\Http\Requests\NewsCategoryCreateRequest;
 use App\Http\Requests\NewsCategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class CategoryController extends BaseController
 {
@@ -18,7 +23,7 @@ class CategoryController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -29,7 +34,7 @@ class CategoryController extends BaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -40,7 +45,7 @@ class CategoryController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param NewsCategoryCreateRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(NewsCategoryCreateRequest $request)
     {
@@ -63,7 +68,7 @@ class CategoryController extends BaseController
      *
      * @param NewsCategoryUpdateRequest $request
      * @param Category $category
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(NewsCategoryUpdateRequest $request, Category $category)
     {
@@ -95,7 +100,7 @@ class CategoryController extends BaseController
      * Display the specified resource.
      *
      * @param Category $category
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function show(Category $category)
     {
@@ -106,7 +111,7 @@ class CategoryController extends BaseController
      * Show the form for editing the specified resource.
      *
      * @param Category $category
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function edit(Category $category)
     {
@@ -117,7 +122,7 @@ class CategoryController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param Category $category
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
      */
     public function destroy(Category $category)
     {

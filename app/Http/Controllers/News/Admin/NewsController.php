@@ -4,12 +4,18 @@ namespace App\Http\Controllers\News\Admin;
 
 use App\Dto\NewsPost\CreateNewsPostDtoFactory;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\NewsListRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 use App\Services\NewsPost\NewsPostService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Log;
 
 class NewsController extends BaseController
@@ -30,9 +36,9 @@ class NewsController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function index(Request $request)
+    public function index(NewsListRequest $request)
     {
         $posts = $this->newsRepository->getNewsPostsWithFilterPaginate($request, 20);
         return view('admin.newsposts.index', compact('posts'));
@@ -41,7 +47,7 @@ class NewsController extends BaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -53,7 +59,7 @@ class NewsController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param CreatePostRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(CreatePostRequest $request)
     {
@@ -72,7 +78,7 @@ class NewsController extends BaseController
      * Display the specified resource.
      *
      * @param Post $post
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function show(Post $post)
     {
@@ -83,7 +89,7 @@ class NewsController extends BaseController
      * Show the form for editing the specified resource.
      *
      * @param Post $post
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function edit(Post $post)
     {
@@ -96,7 +102,7 @@ class NewsController extends BaseController
      *
      * @param UpdatePostRequest $request
      * @param Post $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
@@ -121,8 +127,8 @@ class NewsController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param Post $post
+     * @return Application|RedirectResponse|Redirector
      */
     public function destroy(Post $post)
     {
