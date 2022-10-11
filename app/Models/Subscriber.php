@@ -7,6 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Jenssegers\Date\Date;
 
+/**
+ * App\Models\Subscriber
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $author_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $author
+ * @property-read mixed $middle_format_date
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber whereAuthorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber withAuthor($authorId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subscriber withSubscriber($subscriberId)
+ * @mixin \Eloquent
+ */
 class Subscriber extends Model
 {
     use HasFactory;

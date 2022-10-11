@@ -25,3 +25,33 @@
 * Уведомление пользователя о новой подписке
 * Уведомление администратора о критических событий сервиса
 * Виджеты в админке основных метрик сервиса
+
+## Установка
+```bash
+cp .env.example .env
+docker-compose up -d
+docker exec -it news-app composer install && npm install && npm run prod
+docker exec -it news-app php artisan key:generate && php artisan migrate --seed && php artisan storage:link 
+```
+
+## Команды
+
+### Сборка контейнеров
+```bash
+docker-compose build 
+```
+
+### Вход в консоль докера
+```bash
+docker exec -it news-app bash
+```
+
+### Запуск контейнеров
+```bash
+docker-compose up -d 
+```
+
+### Остановка контейнеров
+```bash
+docker-compose down
+```

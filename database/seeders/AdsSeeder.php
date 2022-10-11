@@ -22,7 +22,7 @@ class AdsSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-
+        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
         $storagePath = storage_path($this->storage);
 
         if(!File::exists($storagePath)){
@@ -34,7 +34,7 @@ class AdsSeeder extends Seeder
                 'name' => 'Header',
                 'link' => '/',
                 'type' => 'header',
-                'image' => 'images/' . $faker->image(storage_path($this->storage),728,90, 'abstract', false, true),
+                'image' => 'images/' . $faker->image(storage_path($this->storage),728,90, false, null, true),
                 'showdate_start' => Carbon::now(),
                 'showdate_end' => $faker->dateTimeBetween('now', '+2 months'),
             ],
@@ -42,7 +42,7 @@ class AdsSeeder extends Seeder
                 'name' => 'side',
                 'link' => '/',
                 'type' => 'side',
-                'image' => 'images/' . $faker->image(storage_path($this->storage),255,293, 'abstract', false, true),
+                'image' => 'images/' . $faker->image(storage_path($this->storage),255,293,false, null, true),
                 'showdate_start' => Carbon::now(),
                 'showdate_end' => $faker->dateTimeBetween('now', '+2 months'),
             ],

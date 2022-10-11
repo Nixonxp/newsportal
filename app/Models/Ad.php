@@ -8,6 +8,36 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
+/**
+ * App\Models\Ad
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $image
+ * @property string $link
+ * @property string $type
+ * @property string $showdate_start
+ * @property string $showdate_end
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Ad active()
+ * @method static Builder|Ad filter(\App\Services\Filters\QueryFilter $filters)
+ * @method static Builder|Ad newModelQuery()
+ * @method static Builder|Ad newQuery()
+ * @method static Builder|Ad notActive()
+ * @method static Builder|Ad query()
+ * @method static Builder|Ad type($type)
+ * @method static Builder|Ad whereCreatedAt($value)
+ * @method static Builder|Ad whereId($value)
+ * @method static Builder|Ad whereImage($value)
+ * @method static Builder|Ad whereLink($value)
+ * @method static Builder|Ad whereName($value)
+ * @method static Builder|Ad whereShowdateEnd($value)
+ * @method static Builder|Ad whereShowdateStart($value)
+ * @method static Builder|Ad whereType($value)
+ * @method static Builder|Ad whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Ad extends Model
 {
     use HasFactory;

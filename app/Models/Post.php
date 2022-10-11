@@ -16,6 +16,66 @@ use Illuminate\Support\Str;
 
 /**
  * Model for news entities
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string|null $image
+ * @property int $category_id
+ * @property int|null $user_id
+ * @property string|null $excerpt
+ * @property string $content
+ * @property bool $is_published
+ * @property string|null $published_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property bool $main_slider
+ * @property bool $popular
+ * @property string|null $source_name
+ * @property string|null $source_link
+ * @property string|null $source_image
+ * @property bool|null $partner_news
+ * @property-read \App\Models\Category $category
+ * @property-read string $full_short_time_format
+ * @property-read string $middle_format_date
+ * @property-read string $middle_short_month_format_date
+ * @property-read string $short_time_format
+ * @property-read object $status
+ * @property-read \App\Models\User|null $user
+ * @method static Builder|Post category($cid)
+ * @method static Builder|Post external()
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
+ * @method static Builder|Post filter(\App\Services\Filters\QueryFilter $filters)
+ * @method static Builder|Post newModelQuery()
+ * @method static Builder|Post newQuery()
+ * @method static Builder|Post nowPublished()
+ * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
+ * @method static Builder|Post popular()
+ * @method static Builder|Post published()
+ * @method static Builder|Post query()
+ * @method static Builder|Post whereCategoryId($value)
+ * @method static Builder|Post whereContent($value)
+ * @method static Builder|Post whereCreatedAt($value)
+ * @method static Builder|Post whereDeletedAt($value)
+ * @method static Builder|Post whereExcerpt($value)
+ * @method static Builder|Post whereId($value)
+ * @method static Builder|Post whereImage($value)
+ * @method static Builder|Post whereIsPublished($value)
+ * @method static Builder|Post whereMainSlider($value)
+ * @method static Builder|Post wherePartnerNews($value)
+ * @method static Builder|Post wherePopular($value)
+ * @method static Builder|Post wherePublishedAt($value)
+ * @method static Builder|Post whereSlug($value)
+ * @method static Builder|Post whereSourceImage($value)
+ * @method static Builder|Post whereSourceLink($value)
+ * @method static Builder|Post whereSourceName($value)
+ * @method static Builder|Post whereTitle($value)
+ * @method static Builder|Post whereUpdatedAt($value)
+ * @method static Builder|Post whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
+ * @mixin \Eloquent
  */
 class Post extends Model
 {

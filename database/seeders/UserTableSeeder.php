@@ -22,6 +22,7 @@ class UserTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
         $storagePath = storage_path($this->storage);
 
         if(!File::exists($storagePath)){
@@ -36,7 +37,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('adminpass'),
                     'role_id' => Role::where('name', 'Admin')->first()->id,
                     'created_at' => Carbon::now(),
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
                 [
                     'name' => 'Editor',
@@ -44,7 +45,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('cmanager123'),
                     'role_id' => Role::where('name', 'Editor')->first()->id,
                     'created_at' => Carbon::now(),
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
                 [
                     'name' => 'Chief Editor',
@@ -52,7 +53,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('chiefrpass'),
                     'role_id' => Role::where('name', 'Chief-editor')->first()->id,
                     'created_at' => Carbon::now(),
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
                 [
                     'name' => 'User',
@@ -60,7 +61,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('userpass'),
                     'role_id' => Role::where('name', 'User')->first()->id,
                     'created_at' => Carbon::now(),
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
                 [
                     'name' => 'Editor 2',
@@ -68,7 +69,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('cmanager123'),
                     'created_at' => Carbon::now(),
                     'role_id' => Role::where('name', 'Editor')->first()->id,
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
                 [
                     'name' => 'Editor 3',
@@ -76,7 +77,7 @@ class UserTableSeeder extends Seeder
                     'password' => bcrypt('cmanager123'),
                     'role_id' => Role::where('name', 'Editor')->first()->id,
                     'created_at' => Carbon::now(),
-                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+                    'image' => 'userimages/' . $faker->image(storage_path($this->storage),640,480, false, null, true),
                 ],
             ]
         );

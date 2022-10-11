@@ -22,6 +22,8 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($this->faker));
+
         $title = Str::limit($this->faker->realText(), 50);
         $isPublished = (random_int(1,10) > 1);
 
@@ -33,7 +35,7 @@ class PostFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title) . random_int(1,1000),
-            'image' => 'images/' . $this->faker->image(storage_path($this->storage),640,480, 'abstract', false, true),
+            'image' => 'images/' . $this->faker->image(storage_path($this->storage),640,480,  false, null, true),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },

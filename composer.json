@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "barryvdh/laravel-elfinder": "^0.4.7",
         "danielme85/laravel-log-to-db": "^3.0",
         "diglactic/laravel-breadcrumbs": "^7.1",
@@ -19,8 +19,7 @@
         "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.2",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11"
+        "laravel/ui": "^3.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -33,7 +32,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10",
-        "roave/security-advisories": "dev-master"
+        "smknstd/fakerphp-picsum-images": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -56,7 +55,6 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:model",
             "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
